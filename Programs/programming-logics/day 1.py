@@ -5,18 +5,24 @@
 #     print(arr)
 
 # -------------------------------------------
-# numbers = [1,2,5,3,4,6,9,65]
-# max = numbers[0]
-# for num in numbers:
-#     if num > max:
-#         max = num
-# print("maximum",max)
+numbers = [2,95,3,4,6,9,65,1]
+max = numbers[0]
+for num in numbers:
+    if num > max:
+        max = num
+print("maximum",max)
 
 # --------------------------------------------
-numbers = [1,6,5,7,3,8,0]
-min = numbers[0]
-for num in numbers:
-    if num < min:
-        min = num
+# numbers = [1,6,5,7,3,8,0]
+# min = numbers[0]
+# for num in numbers:
+#     if num < min:
+#         min = num
 
-print("Minimum",min)
+# print("Minimum",min)
+
+# ===================================
+# arr = [10,100,13,45,88]
+# for a in arr:
+#     print(a)
+# print(arr[0])
