@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DSA Interview Handbook — Saurav Education | Dragon Boss Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0c10;
+  --surface: #111318;
+  --surface2: #181c24;
+  --border: #1e2330;
+  --accent: #f97316;
+  --accent2: #3b82f6;
+  --accent3: #22c55e;
+  --accent4: #a855f7;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --easy: #22c55e;
+  --medium: #f59e0b;
+  --hard: #ef4444;
+  --code-bg: #0d1117;
+  --tag-bg: #1e2330;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;min-height:100vh}
+
+/* TOP HEADER */
+.top-header{background:linear-gradient(135deg,#0f1520 0%,#1a1030 50%,#0f1520 100%);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:16px;height:56px}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent);white-space:nowrap}
+.logo span{color:var(--accent2)}
+.search-bar{flex:1;max-width:520px;position:relative}
+.search-bar input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px 8px 36px;color:var(--text);font-size:14px;outline:none;transition:border .2s}
+.search-bar input:focus{border-color:var(--accent)}
+.search-bar .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px}
+.header-stats{display:flex;gap:12px;margin-left:auto}
+.stat-badge{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--muted);white-space:nowrap}
+.stat-badge b{color:var(--accent)}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 56px)}
+
+/* SIDEBAR */
+.sidebar{width:260px;min-width:260px;background:var(--surface);border-right:1px solid var(--border);position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;padding:16px 0}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border)}
+.nav-section{margin-bottom:8px}
+.nav-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);padding:8px 16px 4px;text-transform:uppercase;letter-spacing:.08em}
+.nav-item{display:flex;align-items:center;gap:10px;padding:7px 16px;font-size:13px;color:var(--muted);cursor:pointer;border-left:2px solid transparent;transition:all .15s}
+.nav-item:hover,.nav-item.active{color:var(--text);border-left-color:var(--accent);background:var(--surface2)}
+.nav-item .ni{font-size:14px;width:18px}
+.nav-count{margin-left:auto;background:var(--tag-bg);border-radius:10px;padding:1px 7px;font-size:11px;color:var(--muted)}
+
+/* MAIN CONTENT */
+.main{flex:1;padding:24px 32px;max-width:1100px}
+.page-hero{background:linear-gradient(135deg,#0f172a,#1e1040);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:28px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(249,115,22,.15),transparent 70%)}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:8px}
+.page-hero h1 span{color:var(--accent)}
+.page-hero p{color:var(--muted);font-size:14px;max-width:600px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.htag{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);color:var(--accent);border-radius:20px;padding:3px 12px;font-size:12px}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-btn{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .15s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent)}
+.filter-btn.easy.active{border-color:var(--easy);color:var(--easy)}
+.filter-btn.medium.active{border-color:var(--medium);color:var(--medium)}
+.filter-btn.hard.active{border-color:var(--hard);color:var(--hard)}
+
+/* SECTION HEADING */
+.section-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin:32px 0 16px;display:flex;align-items:center;gap:10px}
+.section-title .icon{font-size:20px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);margin-left:12px}
+
+/* QUESTION CARD */
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;transition:border .2s}
+.q-card:hover{border-color:rgba(249,115,22,.3)}
+.q-header{padding:16px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:12px}
+.q-num{background:var(--tag-bg);border-radius:6px;padding:2px 8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);min-width:36px;text-align:center;margin-top:2px}
+.q-info{flex:1}
+.q-title{font-weight:600;font-size:15px;margin-bottom:6px}
+.q-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.diff-badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.diff-easy{background:rgba(34,197,94,.1);color:var(--easy);border:1px solid rgba(34,197,94,.3)}
+.diff-medium{background:rgba(245,158,11,.1);color:var(--medium);border:1px solid rgba(245,158,11,.3)}
+.diff-hard{background:rgba(239,68,68,.1);color:var(--hard);border:1px solid rgba(239,68,68,.3)}
+.company-tag{background:var(--tag-bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--muted)}
+.freq-tag{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);color:var(--accent4);border-radius:4px;padding:2px 7px;font-size:10px}
+.q-chevron{color:var(--muted);font-size:14px;transition:transform .2s;margin-top:4px}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+
+/* QUESTION BODY */
+.q-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.q-card.open .q-body{display:block}
+.q-section{margin-top:16px}
+.q-section-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.q-section-label::before{content:'▸'}
+.q-text{font-size:13.5px;color:#b0bcd4;line-height:1.7}
+.io-box{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a8d8a8;margin-top:8px;white-space:pre-wrap}
+.io-box .label{color:var(--muted);font-size:11px;margin-bottom:4px;display:block}
+
+/* CODE BLOCK */
+.code-block{position:relative;background:var(--code-bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:8px}
+.code-top{display:flex;align-items:center;padding:8px 14px;border-bottom:1px solid var(--border);background:#0a0e16}
+.code-lang{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.copy-btn{margin-left:auto;background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);font-size:11px;padding:2px 8px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.code-block pre{padding:14px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.65;color:#cdd9e5}
+.code-block pre::-webkit-scrollbar{height:4px}
+.code-block pre::-webkit-scrollbar-thumb{background:var(--border)}
+
+/* SYNTAX HIGHLIGHT */
+.kw{color:#e06c75} /* keywords */
+.fn{color:#61afef} /* functions */
+.st{color:#98c379} /* strings */
+.cm{color:#5c6370;font-style:italic} /* comments */
+.nm{color:#d19a66} /* numbers */
+.dt{color:#c678dd} /* def/class */
+.op{color:#56b6c2} /* operators */
+
+/* COMPLEXITY TABLE */
+.cx-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+.cx-table th{background:var(--tag-bg);padding:8px 12px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border)}
+.cx-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text)}
+.cx-table td:first-child{color:var(--accent);font-weight:600}
+.cx-tc{color:var(--accent2) !important}
+.cx-sc{color:var(--accent3) !important}
+
+/* TIPS GRID */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.tip-box{background:var(--code-bg);border-radius:8px;padding:10px 12px;font-size:12.5px}
+.tip-box.warn{border-left:3px solid var(--hard)}
+.tip-box.info{border-left:3px solid var(--accent2)}
+.tip-box.good{border-left:3px solid var(--easy)}
+.tip-label{font-weight:600;font-size:11px;margin-bottom:4px;color:var(--muted)}
+
+/* SQL CARD */
+.sql-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.sql-table th{background:rgba(59,130,246,.1);color:var(--accent2);padding:8px 12px;text-align:left;border:1px solid var(--border);font-size:12px}
+.sql-table td{padding:8px 12px;border:1px solid var(--border);color:var(--text)}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px}
+.tab{padding:8px 18px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.tab:hover,.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+
+/* PROGRESS BAR */
+.progress-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:24px}
+.progress-title{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:16px;font-size:16px}
+.prog-item{margin-bottom:12px}
+.prog-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.prog-bar{height:6px;background:var(--tag-bg);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;transition:width .3s}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:16px}
+  .tips-grid{grid-template-columns:1fr}
+  .header-stats{display:none}
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.q-card{animation:fadeIn .3s ease both}
+.q-card:nth-child(2){animation-delay:.05s}
+.q-card:nth-child(3){animation-delay:.1s}
+
+/* SPECIAL BOXES */
+.info-alert{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:12px 14px;font-size:13px;color:#93c5fd;margin:12px 0}
+.warn-alert{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:12px 14px;font-size:13px;color:#fca5a5;margin:12px 0}
+.success-alert{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:12px 14px;font-size:13px;color:#86efac;margin:12px 0}
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<div class="top-header">
+  <div class="logo">🐉 <span>Saurav</span>Education | DSA Handbook</div>
+  <div class="search-bar">
+    <span class="si">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search questions, topics, companies..." oninput="filterQuestions()"/>
+  </div>
+  <div class="header-stats">
+    <div class="stat-badge">Questions: <b id="visibleCount">120+</b></div>
+    <div class="stat-badge">Topics: <b>24</b></div>
+    <div class="stat-badge">Companies: <b>50+</b></div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="nav-section">
+    <div class="nav-label">📌 Quick Access</div>
+    <div class="nav-item active" onclick="showSection('all')"><span class="ni">🏠</span>All Questions<span class="nav-count" id="cnt-all">120</span></div>
+    <div class="nav-item" onclick="filterDiff('easy')"><span class="ni">🟢</span>Easy<span class="nav-count">40</span></div>
+    <div class="nav-item" onclick="filterDiff('medium')"><span class="ni">🟡</span>Medium<span class="nav-count">50</span></div>
+    <div class="nav-item" onclick="filterDiff('hard')"><span class="ni">🔴</span>Hard<span class="nav-count">30</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">📚 DSA Topics</div>
+    <div class="nav-item" onclick="showSection('arrays')"><span class="ni">📊</span>Arrays<span class="nav-count">8</span></div>
+    <div class="nav-item" onclick="showSection('strings')"><span class="ni">🔤</span>Strings<span class="nav-count">6</span></div>
+    <div class="nav-item" onclick="showSection('hashmap')"><span class="ni">🗂️</span>HashMaps<span class="nav-count">5</span></div>
+    <div class="nav-item" onclick="showSection('linkedlist')"><span class="ni">🔗</span>Linked List<span class="nav-count">5</span></div>
+    <div class="nav-item" onclick="showSection('stack')"><span class="ni">📚</span>Stack & Queue<span class="nav-count">4</span></div>
+    <div class="nav-item" onclick="showSection('tree')"><span class="ni">🌳</span>Trees & BST<span class="nav-count">6</span></div>
+    <div class="nav-item" onclick="showSection('dp')"><span class="ni">💡</span>Dynamic Programming<span class="nav-count">8</span></div>
+    <div class="nav-item" onclick="showSection('graph')"><span class="ni">🕸️</span>Graphs<span class="nav-count">5</span></div>
+    <div class="nav-item" onclick="showSection('sorting')"><span class="ni">🔃</span>Sorting & Searching<span class="nav-count">4</span></div>
+    <div class="nav-item" onclick="showSection('sliding')"><span class="ni">🪟</span>Sliding Window<span class="nav-count">4</span></div>
+    <div class="nav-item" onclick="showSection('twopointer')"><span class="ni">👆</span>Two Pointer<span class="nav-count">3</span></div>
+    <div class="nav-item" onclick="showSection('backtrack')"><span class="ni">🔙</span>Backtracking<span class="nav-count">3</span></div>
+    <div class="nav-item" onclick="showSection('heap')"><span class="ni">⛰️</span>Heap / Priority Queue<span class="nav-count">3</span></div>
+    <div class="nav-item" onclick="showSection('greedy')"><span class="ni">🤑</span>Greedy<span class="nav-count">3</span></div>
+    <div class="nav-item" onclick="showSection('bit')"><span class="ni">🔢</span>Bit Manipulation<span class="nav-count">3</span></div>
+    <div class="nav-item" onclick="showSection('trie')"><span class="ni">🌐</span>Trie<span class="nav-count">2</span></div>
+    <div class="nav-item" onclick="showSection('segment')"><span class="ni">📏</span>Segment Tree<span class="nav-count">2</span></div>
+    <div class="nav-item" onclick="showSection('recursion')"><span class="ni">🔄</span>Recursion<span class="nav-count">3</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">🗄️ Non-DSA</div>
+    <div class="nav-item" onclick="showSection('sql')"><span class="ni">🗄️</span>SQL<span class="nav-count">10</span></div>
+    <div class="nav-item" onclick="showSection('oops')"><span class="ni">🧱</span>OOPs Coding<span class="nav-count">6</span></div>
+    <div class="nav-item" onclick="showSection('lld')"><span class="ni">🏗️</span>LLD & Machine Coding<span class="nav-count">5</span></div>
+    <div class="nav-item" onclick="showSection('thread')"><span class="ni">🧵</span>Multithreading<span class="nav-count">3</span></div>
+    <div class="nav-item" onclick="showSection('hr')"><span class="ni">💼</span>HR + Viva<span class="nav-count">10</span></div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1>🐉 DSA Interview <span>Handbook</span></h1>
+  <p>India's most comprehensive coding interview guide — covering TCS, Infosys, Amazon, Google, Flipkart, Zoho, Startups, and 50+ companies. Beginner to FAANG level. Made by Dragon Boss, for Dragon Boss. 💪</p>
+  <div class="hero-tags">
+    <span class="htag">120+ Questions</span>
+    <span class="htag">24 Topics</span>
+    <span class="htag">50+ Companies</span>
+    <span class="htag">Python Solutions</span>
+    <span class="htag">Easy → Hard</span>
+    <span class="htag">Hinglish Friendly</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" onclick="filterDiff('all',this)">All</button>
+  <button class="filter-btn easy" onclick="filterDiff('easy',this)">🟢 Easy</button>
+  <button class="filter-btn medium" onclick="filterDiff('medium',this)">🟡 Medium</button>
+  <button class="filter-btn hard" onclick="filterDiff('hard',this)">🔴 Hard</button>
+  <button class="filter-btn" onclick="filterCompany('faang',this)">FAANG</button>
+  <button class="filter-btn" onclick="filterCompany('service',this)">Service-Based</button>
+  <button class="filter-btn" onclick="filterCompany('product',this)">Product-Based</button>
+  <button class="filter-btn" onclick="filterCompany('startup',this)">Startups</button>
+  <button class="filter-btn" onclick="filterCompany('indore',this)">Indore</button>
+</div>
+
+<!-- ======================= ARRAYS ======================= -->
+<div class="section-title" id="sec-arrays"><span class="icon">📊</span>Arrays</div>
+
+<!-- Q1 -->
+<div class="q-card" data-topic="arrays" data-diff="easy" data-cat="service faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q1</span>
+  <div class="q-info">
+    <div class="q-title">Two Sum — Find two numbers that add to target</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span>
+      <span class="company-tag">Google</span>
+      <span class="company-tag">TCS NQT</span>
+      <span class="company-tag">Infosys</span>
+      <span class="company-tag">Wipro</span>
+      <span class="company-tag">Zoho</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given an array of integers <b>nums</b> and an integer <b>target</b>, return the indices of the two numbers such that they add up to target. Assume exactly one solution exists. You may not use the same element twice.</div>
+    <div class="info-alert">🧠 Real-life example: Sochlo tum ek grocery store mein ho. List mein prices hain, aur tumhare paas exactly ₹100 hain. Kaunse 2 items milakaar exactly ₹100 banate hain?</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>nums = [2, 7, 11, 15], target = 9
+<span class="label">Output:</span>[0, 1]  →  nums[0] + nums[1] = 2 + 7 = 9
+
+<span class="label">Input:</span>nums = [3, 2, 4], target = 6
+<span class="label">Output:</span>[1, 2]</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Brute Force Approach — O(n²)</div>
+    <div class="q-text">Har element ke liye baaki sab elements check karo. Double loop lagao. Slow but simple.</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Brute Force</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">two_sum_brute</span>(nums, target):
+    n = len(nums)
+    <span class="kw">for</span> i <span class="kw">in</span> range(n):
+        <span class="kw">for</span> j <span class="kw">in</span> range(i<span class="op">+</span><span class="nm">1</span>, n):
+            <span class="kw">if</span> nums[i] <span class="op">+</span> nums[j] <span class="op">==</span> target:
+                <span class="kw">return</span> [i, j]
+    <span class="kw">return</span> []</pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Optimal Approach — HashMap O(n)</div>
+    <div class="q-text">HashMap mein complement store karo. Ek hi pass mein answer milega. Sochlo: agar target=9 aur current=2, toh mujhe 7 chahiye — kya 7 already mila hai? HashMap mein dekho!</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Optimal HashMap</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">two_sum</span>(nums, target):
+    seen = {}  <span class="cm"># value → index</span>
+    <span class="kw">for</span> i, num <span class="kw">in</span> enumerate(nums):
+        complement = target <span class="op">-</span> num
+        <span class="kw">if</span> complement <span class="kw">in</span> seen:
+            <span class="kw">return</span> [seen[complement], i]
+        seen[num] = i
+    <span class="kw">return</span> []
+
+<span class="cm"># Test</span>
+print(two_sum([<span class="nm">2</span>, <span class="nm">7</span>, <span class="nm">11</span>, <span class="nm">15</span>], <span class="nm">9</span>))  <span class="cm"># [0, 1]</span>
+print(two_sum([<span class="nm">3</span>, <span class="nm">2</span>, <span class="nm">4</span>], <span class="nm">6</span>))       <span class="cm"># [1, 2]</span></pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Complexity</div>
+    <table class="cx-table">
+      <tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+      <tr><td>Brute Force</td><td class="cx-tc">O(n²)</td><td class="cx-sc">O(1)</td></tr>
+      <tr><td>HashMap (Optimal)</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n)</td></tr>
+    </table>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Edge Cases & Common Mistakes</div>
+    <div class="tips-grid">
+      <div class="tip-box warn"><div class="tip-label">⚠️ Common Mistake</div>Same element ko do baar use karna — e.g., [3,3] target=6, yahan index 0 aur 1 alag hain, yeh valid hai.</div>
+      <div class="tip-box info"><div class="tip-label">💡 Edge Case</div>Empty array → return []. Single element → return []. Negative numbers → HashMap handles them fine!</div>
+      <div class="tip-box good"><div class="tip-label">✅ Interview Tip</div>Pehle brute force explain karo, fir optimize karo. Interviewer process dekhna chahta hai.</div>
+      <div class="tip-box warn"><div class="tip-label">⚠️ Don't Forget</div>Problem mein assume kiya hai exactly one solution hai. Agar multiple solutions ho toh all return karna padega.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q2 -->
+<div class="q-card" data-topic="arrays" data-diff="easy" data-cat="service product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q2</span>
+  <div class="q-info">
+    <div class="q-title">Maximum Subarray Sum (Kadane's Algorithm)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span>
+      <span class="company-tag">Microsoft</span>
+      <span class="company-tag">TCS</span>
+      <span class="company-tag">Infosys</span>
+      <span class="company-tag">Wipro</span>
+      <span class="company-tag">Nagarro</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given an array of integers, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</div>
+    <div class="info-alert">🧠 Real-life: Stock market mein consecutive days ka maximum profit track karo. Kis period mein tumne sabse zyada kamaya?</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>[-2, 1, -3, 4, -1, 2, 1, -5, 4]
+<span class="label">Output:</span>6  →  Subarray [4, -1, 2, 1] = 6
+
+<span class="label">Input:</span>[-1, -2, -3]
+<span class="label">Output:</span>-1  (all negative → pick max single element)</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Kadane's Algorithm — O(n)</div>
+    <div class="q-text">Har position par decide karo: kya main current subarray continue karun ya nayi shuru karun? Agar <code>current_sum + num < num</code> → nayi start karo!</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Kadane's Algorithm</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">max_subarray</span>(nums):
+    max_sum = nums[<span class="nm">0</span>]
+    current_sum = nums[<span class="nm">0</span>]
+    
+    <span class="kw">for</span> num <span class="kw">in</span> nums[<span class="nm">1</span>:]:
+        <span class="cm"># Either extend current subarray or start fresh</span>
+        current_sum = max(num, current_sum <span class="op">+</span> num)
+        max_sum = max(max_sum, current_sum)
+    
+    <span class="kw">return</span> max_sum
+
+<span class="cm"># Bonus: Also return the subarray indices</span>
+<span class="dt">def</span> <span class="fn">max_subarray_with_indices</span>(nums):
+    max_sum = current_sum = nums[<span class="nm">0</span>]
+    start = end = temp_start = <span class="nm">0</span>
+    
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">1</span>, len(nums)):
+        <span class="kw">if</span> nums[i] <span class="op">></span> current_sum <span class="op">+</span> nums[i]:
+            current_sum = nums[i]
+            temp_start = i
+        <span class="kw">else</span>:
+            current_sum <span class="op">+=</span> nums[i]
+        <span class="kw">if</span> current_sum <span class="op">></span> max_sum:
+            max_sum = current_sum
+            start, end = temp_start, i
+    
+    <span class="kw">return</span> max_sum, nums[start:end<span class="op">+</span><span class="nm">1</span>]</pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Complexity</div>
+    <table class="cx-table">
+      <tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+      <tr><td>Brute Force (all subarrays)</td><td class="cx-tc">O(n³)</td><td class="cx-sc">O(1)</td></tr>
+      <tr><td>Kadane's (Optimal)</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(1)</td></tr>
+    </table>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Edge Cases & Interview Tips</div>
+    <div class="tips-grid">
+      <div class="tip-box warn"><div class="tip-label">⚠️ All Negative Array</div>Start with nums[0] as max, not 0. Agar 0 se start karo toh empty subarray count hoga!</div>
+      <div class="tip-box good"><div class="tip-label">✅ Follow-up Questions</div>Interviewer puch sakta hai: "What if we need the actual subarray?" → Track start/end indices.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q3 -->
+<div class="q-card" data-topic="arrays" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q3</span>
+  <div class="q-info">
+    <div class="q-title">3Sum — Find all unique triplets that sum to zero</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Google</span>
+      <span class="company-tag">Microsoft</span>
+      <span class="company-tag">Amazon</span>
+      <span class="company-tag">Adobe</span>
+      <span class="company-tag">Flipkart</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given an integer array, return all the triplets [nums[i], nums[j], nums[k]] such that i≠j, i≠k, j≠k, and nums[i]+nums[j]+nums[k]==0. No duplicate triplets in answer.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>[-1, 0, 1, 2, -1, -4]
+<span class="label">Output:</span>[[-1,-1,2], [-1,0,1]]</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Optimal — Sort + Two Pointer O(n²)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Sort + Two Pointer</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">three_sum</span>(nums):
+    nums.sort()
+    result = []
+    
+    <span class="kw">for</span> i <span class="kw">in</span> range(len(nums) <span class="op">-</span> <span class="nm">2</span>):
+        <span class="cm"># Skip duplicates for i</span>
+        <span class="kw">if</span> i <span class="op">></span> <span class="nm">0</span> <span class="kw">and</span> nums[i] <span class="op">==</span> nums[i<span class="op">-</span><span class="nm">1</span>]:
+            <span class="kw">continue</span>
+        
+        left, right = i<span class="op">+</span><span class="nm">1</span>, len(nums)<span class="op">-</span><span class="nm">1</span>
+        
+        <span class="kw">while</span> left <span class="op"><</span> right:
+            total = nums[i] <span class="op">+</span> nums[left] <span class="op">+</span> nums[right]
+            <span class="kw">if</span> total <span class="op">==</span> <span class="nm">0</span>:
+                result.append([nums[i], nums[left], nums[right]])
+                <span class="cm"># Skip duplicates</span>
+                <span class="kw">while</span> left <span class="op"><</span> right <span class="kw">and</span> nums[left] <span class="op">==</span> nums[left<span class="op">+</span><span class="nm">1</span>]:
+                    left <span class="op">+=</span> <span class="nm">1</span>
+                <span class="kw">while</span> left <span class="op"><</span> right <span class="kw">and</span> nums[right] <span class="op">==</span> nums[right<span class="op">-</span><span class="nm">1</span>]:
+                    right <span class="op">-=</span> <span class="nm">1</span>
+                left <span class="op">+=</span> <span class="nm">1</span>
+                right <span class="op">-=</span> <span class="nm">1</span>
+            <span class="kw">elif</span> total <span class="op"><</span> <span class="nm">0</span>:
+                left <span class="op">+=</span> <span class="nm">1</span>
+            <span class="kw">else</span>:
+                right <span class="op">-=</span> <span class="nm">1</span>
+    
+    <span class="kw">return</span> result</pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Complexity</div>
+    <table class="cx-table">
+      <tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+      <tr><td>Brute Force (3 loops)</td><td class="cx-tc">O(n³)</td><td class="cx-sc">O(1)</td></tr>
+      <tr><td>Sort + Two Pointer</td><td class="cx-tc">O(n²)</td><td class="cx-sc">O(1)</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- Q4 -->
+<div class="q-card" data-topic="arrays" data-diff="medium" data-cat="service product indore" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q4</span>
+  <div class="q-info">
+    <div class="q-title">Rotate Array by K positions</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Wipro</span><span class="company-tag">Capgemini</span><span class="company-tag">InfoBeans</span><span class="company-tag">Nagarro</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given an array nums, rotate the array to the right by k steps, where k is non-negative. In-place with O(1) extra space.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>nums = [1,2,3,4,5,6,7], k = 3
+<span class="label">Output:</span>[5,6,7,1,2,3,4]</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Optimal — Reverse Trick O(n)</div>
+    <div class="q-text">3-step trick: (1) Reverse whole array, (2) Reverse first k elements, (3) Reverse remaining elements.</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Reverse Trick</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">rotate</span>(nums, k):
+    n = len(nums)
+    k = k <span class="op">%</span> n  <span class="cm"># Handle k > n</span>
+    
+    <span class="dt">def</span> <span class="fn">reverse</span>(l, r):
+        <span class="kw">while</span> l <span class="op"><</span> r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l <span class="op">+=</span> <span class="nm">1</span>; r <span class="op">-=</span> <span class="nm">1</span>
+    
+    reverse(<span class="nm">0</span>, n<span class="op">-</span><span class="nm">1</span>)    <span class="cm"># Step 1: Reverse all</span>
+    reverse(<span class="nm">0</span>, k<span class="op">-</span><span class="nm">1</span>)    <span class="cm"># Step 2: Reverse first k</span>
+    reverse(k, n<span class="op">-</span><span class="nm">1</span>)    <span class="cm"># Step 3: Reverse rest</span>
+    <span class="kw">return</span> nums
+
+<span class="cm"># Easy but O(n) space approach:</span>
+<span class="dt">def</span> <span class="fn">rotate_easy</span>(nums, k):
+    k = k <span class="op">%</span> len(nums)
+    <span class="kw">return</span> nums[<span class="op">-</span>k:] <span class="op">+</span> nums[:<span class="op">-</span>k]</pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Complexity</div>
+    <table class="cx-table">
+      <tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+      <tr><td>Extra Array</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n)</td></tr>
+      <tr><td>Reverse Trick</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(1)</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- Q5 - Hard Array -->
+<div class="q-card" data-topic="arrays" data-diff="hard" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q5</span>
+  <div class="q-info">
+    <div class="q-title">Trapping Rain Water</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Adobe</span><span class="company-tag">Uber</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</div>
+    <div class="info-alert">🧠 Real-life: Pahad jaise elevations ke beech barish ka paani kahan ruk sakta hai? Har bar ke upar kitna paani aayega?</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>height = [0,1,0,2,1,0,1,3,2,1,2,1]
+<span class="label">Output:</span>6
+
+<span class="label">Input:</span>height = [4,2,0,3,2,5]
+<span class="label">Output:</span>9</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Optimal — Two Pointer O(n) Time, O(1) Space</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Two Pointer (Best)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">trap</span>(height):
+    <span class="kw">if</span> <span class="kw">not</span> height: <span class="kw">return</span> <span class="nm">0</span>
+    
+    left, right = <span class="nm">0</span>, len(height) <span class="op">-</span> <span class="nm">1</span>
+    left_max = right_max = <span class="nm">0</span>
+    water = <span class="nm">0</span>
+    
+    <span class="kw">while</span> left <span class="op"><</span> right:
+        <span class="kw">if</span> height[left] <span class="op"><</span> height[right]:
+            <span class="kw">if</span> height[left] <span class="op">>=</span> left_max:
+                left_max = height[left]
+            <span class="kw">else</span>:
+                water <span class="op">+=</span> left_max <span class="op">-</span> height[left]
+            left <span class="op">+=</span> <span class="nm">1</span>
+        <span class="kw">else</span>:
+            <span class="kw">if</span> height[right] <span class="op">>=</span> right_max:
+                right_max = height[right]
+            <span class="kw">else</span>:
+                water <span class="op">+=</span> right_max <span class="op">-</span> height[right]
+            right <span class="op">-=</span> <span class="nm">1</span>
+    
+    <span class="kw">return</span> water
+
+<span class="cm"># Key Insight: Water at index i = min(max_left, max_right) - height[i]</span></pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Complexity</div>
+    <table class="cx-table">
+      <tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+      <tr><td>Brute Force</td><td class="cx-tc">O(n²)</td><td class="cx-sc">O(1)</td></tr>
+      <tr><td>Precompute Arrays</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n)</td></tr>
+      <tr><td>Two Pointer (Best)</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(1)</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ======================= STRINGS ======================= -->
+<div class="section-title" id="sec-strings"><span class="icon">🔤</span>Strings</div>
+
+<!-- Q6 -->
+<div class="q-card" data-topic="strings" data-diff="easy" data-cat="service product indore" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q6</span>
+  <div class="q-info">
+    <div class="q-title">Valid Palindrome</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Wipro</span><span class="company-tag">Facebook</span><span class="company-tag">InfoBeans</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>"A man, a plan, a canal: Panama"
+<span class="label">Output:</span>True
+
+<span class="label">Input:</span>"race a car"
+<span class="label">Output:</span>False</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Optimal — Two Pointer</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">is_palindrome</span>(s):
+    <span class="cm"># Clean: keep only alphanumeric, lowercase</span>
+    cleaned = <span class="st">''</span>.join(c.lower() <span class="kw">for</span> c <span class="kw">in</span> s <span class="kw">if</span> c.isalnum())
+    <span class="kw">return</span> cleaned <span class="op">==</span> cleaned[::<span class="op">-</span><span class="nm">1</span>]
+
+<span class="cm"># Two-pointer (O(1) space conceptually):</span>
+<span class="dt">def</span> <span class="fn">is_palindrome_tp</span>(s):
+    left, right = <span class="nm">0</span>, len(s) <span class="op">-</span> <span class="nm">1</span>
+    <span class="kw">while</span> left <span class="op"><</span> right:
+        <span class="kw">while</span> left <span class="op"><</span> right <span class="kw">and</span> <span class="kw">not</span> s[left].isalnum():
+            left <span class="op">+=</span> <span class="nm">1</span>
+        <span class="kw">while</span> left <span class="op"><</span> right <span class="kw">and</span> <span class="kw">not</span> s[right].isalnum():
+            right <span class="op">-=</span> <span class="nm">1</span>
+        <span class="kw">if</span> s[left].lower() <span class="op">!=</span> s[right].lower():
+            <span class="kw">return</span> False
+        left <span class="op">+=</span> <span class="nm">1</span>; right <span class="op">-=</span> <span class="nm">1</span>
+    <span class="kw">return</span> True</pre>
+    </div>
+  </div>
+  <div class="q-section"><div class="q-section-label">Complexity</div>
+    <table class="cx-table"><tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+    <tr><td>Cleaned + Reverse</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n)</td></tr>
+    <tr><td>Two Pointer</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(1)</td></tr></table>
+  </div>
+</div>
+</div>
+
+<!-- Q7 Anagram -->
+<div class="q-card" data-topic="strings hashmap" data-diff="easy" data-cat="service product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q7</span>
+  <div class="q-info">
+    <div class="q-title">Valid Anagram</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Cognizant</span><span class="company-tag">Amazon</span><span class="company-tag">Zoho</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given two strings s and t, return true if t is an anagram of s, and false otherwise. An anagram uses same characters same number of times.</div>
+    <div class="info-alert">🧠 "listen" aur "silent" — dono same letters se bane hain! Anagram hai!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>s = "anagram", t = "nagaram"
+<span class="label">Output:</span>True
+
+<span class="label">Input:</span>s = "rat", t = "car"
+<span class="label">Output:</span>False</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Solutions</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Multiple Approaches</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">from</span> collections <span class="kw">import</span> Counter
+
+<span class="cm"># Method 1: Counter (Pythonic)</span>
+<span class="dt">def</span> <span class="fn">is_anagram_1</span>(s, t):
+    <span class="kw">return</span> Counter(s) <span class="op">==</span> Counter(t)
+
+<span class="cm"># Method 2: Sort</span>
+<span class="dt">def</span> <span class="fn">is_anagram_2</span>(s, t):
+    <span class="kw">return</span> sorted(s) <span class="op">==</span> sorted(t)  <span class="cm"># O(n log n)</span>
+
+<span class="cm"># Method 3: Frequency Array (Best for interviews)</span>
+<span class="dt">def</span> <span class="fn">is_anagram_3</span>(s, t):
+    <span class="kw">if</span> len(s) <span class="op">!=</span> len(t): <span class="kw">return</span> False
+    count = [<span class="nm">0</span>] <span class="op">*</span> <span class="nm">26</span>
+    <span class="kw">for</span> c <span class="kw">in</span> s: count[ord(c) <span class="op">-</span> ord(<span class="st">'a'</span>)] <span class="op">+=</span> <span class="nm">1</span>
+    <span class="kw">for</span> c <span class="kw">in</span> t: count[ord(c) <span class="op">-</span> ord(<span class="st">'a'</span>)] <span class="op">-=</span> <span class="nm">1</span>
+    <span class="kw">return</span> all(x <span class="op">==</span> <span class="nm">0</span> <span class="kw">for</span> x <span class="kw">in</span> count)</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q8 Longest Substring -->
+<div class="q-card" data-topic="strings sliding" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q8</span>
+  <div class="q-info">
+    <div class="q-title">Longest Substring Without Repeating Characters</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">Google</span><span class="company-tag">Adobe</span><span class="company-tag">Razorpay</span><span class="company-tag">PhonePe</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given a string s, find the length of the longest substring without repeating characters.</div>
+    <div class="info-alert">🧠 "pwwkew" → longest is "wke" = 3. Sliding window technique ka classic example!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>"abcabcbb"  →  Output: 3  ("abc")
+<span class="label">Input:</span>"bbbbb"     →  Output: 1  ("b")
+<span class="label">Input:</span>"pwwkew"    →  Output: 3  ("wke")</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Sliding Window + HashMap O(n)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Sliding Window</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">length_of_longest_substring</span>(s):
+    char_index = {}  <span class="cm"># char → last seen index</span>
+    max_len = <span class="nm">0</span>
+    left = <span class="nm">0</span>  <span class="cm"># window start</span>
+    
+    <span class="kw">for</span> right, char <span class="kw">in</span> enumerate(s):
+        <span class="kw">if</span> char <span class="kw">in</span> char_index <span class="kw">and</span> char_index[char] <span class="op">>=</span> left:
+            <span class="cm"># Shrink window from left</span>
+            left = char_index[char] <span class="op">+</span> <span class="nm">1</span>
+        char_index[char] = right
+        max_len = max(max_len, right <span class="op">-</span> left <span class="op">+</span> <span class="nm">1</span>)
+    
+    <span class="kw">return</span> max_len</pre>
+    </div>
+  </div>
+  <div class="q-section"><div class="q-section-label">Complexity</div>
+    <table class="cx-table"><tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+    <tr><td>Brute Force (all substrings)</td><td class="cx-tc">O(n³)</td><td class="cx-sc">O(min(n,m))</td></tr>
+    <tr><td>Sliding Window</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(min(n,m))</td></tr></table>
+  </div>
+</div>
+</div>
+
+<!-- ======================= LINKED LIST ======================= -->
+<div class="section-title" id="sec-linkedlist"><span class="icon">🔗</span>Linked List</div>
+
+<!-- Q9 Reverse LL -->
+<div class="q-card" data-topic="linkedlist" data-diff="easy" data-cat="service product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q9</span>
+  <div class="q-info">
+    <div class="q-title">Reverse a Linked List</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Wipro</span><span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given the head of a singly linked list, reverse the list, and return the reversed list.</div>
+    <div class="info-alert">🧠 Train wagons ki tarah sochlo — 1→2→3→4→5 ko 5→4→3→2→1 karna hai. Ek-ek wagon ka direction badlo!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>1 → 2 → 3 → 4 → 5
+<span class="label">Output:</span>5 → 4 → 3 → 2 → 1</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Iterative + Recursive Solutions</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Both Approaches</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">class</span> <span class="fn">ListNode</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, val=<span class="nm">0</span>, next=None):
+        self.val = val
+        self.next = next
+
+<span class="cm"># Iterative (Preferred in interviews)</span>
+<span class="dt">def</span> <span class="fn">reverse_list</span>(head):
+    prev = None
+    current = head
+    
+    <span class="kw">while</span> current:
+        next_node = current.next  <span class="cm"># Save next</span>
+        current.next = prev       <span class="cm"># Reverse pointer</span>
+        prev = current            <span class="cm"># Move prev forward</span>
+        current = next_node       <span class="cm"># Move current forward</span>
+    
+    <span class="kw">return</span> prev  <span class="cm"># New head</span>
+
+<span class="cm"># Recursive</span>
+<span class="dt">def</span> <span class="fn">reverse_list_rec</span>(head):
+    <span class="kw">if</span> <span class="kw">not</span> head <span class="kw">or</span> <span class="kw">not</span> head.next:
+        <span class="kw">return</span> head
+    new_head = reverse_list_rec(head.next)
+    head.next.next = head
+    head.next = None
+    <span class="kw">return</span> new_head</pre>
+    </div>
+  </div>
+  <div class="q-section"><div class="q-section-label">Complexity</div>
+    <table class="cx-table"><tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+    <tr><td>Iterative</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(1)</td></tr>
+    <tr><td>Recursive</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n) call stack</td></tr></table>
+  </div>
+</div>
+</div>
+
+<!-- Q10 Cycle Detection -->
+<div class="q-card" data-topic="linkedlist" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q10</span>
+  <div class="q-info">
+    <div class="q-title">Detect Cycle in Linked List (Floyd's Tortoise & Hare)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Paytm</span><span class="company-tag">Swiggy</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given head of a linked list, determine if the linked list has a cycle. Can you do it with O(1) memory?</div>
+    <div class="info-alert">🧠 Circular race track! Ek runner fast (2 step), ek slow (1 step). Agar track circular hai toh fast wala slow ko zaroor pakad lega!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>3 → 2 → 0 → -4 → (back to 2)
+<span class="label">Output:</span>True (cycle exists at node 2)
+
+<span class="label">Input:</span>1 → 2 → None
+<span class="label">Output:</span>False</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Floyd's Algorithm</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Floyd's Tortoise & Hare</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">has_cycle</span>(head):
+    slow = fast = head
+    
+    <span class="kw">while</span> fast <span class="kw">and</span> fast.next:
+        slow = slow.next        <span class="cm"># 1 step</span>
+        fast = fast.next.next   <span class="cm"># 2 steps</span>
+        <span class="kw">if</span> slow <span class="op">==</span> fast:
+            <span class="kw">return</span> True
+    
+    <span class="kw">return</span> False
+
+<span class="cm"># Bonus: Find the start of cycle</span>
+<span class="dt">def</span> <span class="fn">detect_cycle_start</span>(head):
+    slow = fast = head
+    <span class="kw">while</span> fast <span class="kw">and</span> fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        <span class="kw">if</span> slow <span class="op">==</span> fast:
+            <span class="cm"># Reset one pointer to head</span>
+            slow = head
+            <span class="kw">while</span> slow <span class="op">!=</span> fast:
+                slow = slow.next
+                fast = fast.next
+            <span class="kw">return</span> slow  <span class="cm"># Cycle start node</span>
+    <span class="kw">return</span> None</pre>
+    </div>
+  </div>
+  <div class="q-section"><div class="q-section-label">Complexity</div>
+    <table class="cx-table"><tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+    <tr><td>HashSet</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n)</td></tr>
+    <tr><td>Floyd's (Optimal)</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(1)</td></tr></table>
+  </div>
+</div>
+</div>
+
+<!-- ======================= STACK & QUEUE ======================= -->
+<div class="section-title" id="sec-stack"><span class="icon">📚</span>Stack & Queue</div>
+
+<!-- Q11 Valid Parens -->
+<div class="q-card" data-topic="stack" data-diff="easy" data-cat="service product faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q11</span>
+  <div class="q-info">
+    <div class="q-title">Valid Parentheses</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Zoho</span><span class="company-tag">Freshworks</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. Each open bracket must be closed in correct order.</div>
+    <div class="info-alert">🧠 HTML tags ki tarah! &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt; valid, lekin &lt;div&gt;&lt;p&gt;&lt;/div&gt;&lt;/p&gt; invalid!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>"()"     → True
+"()[]{}" → True
+"(]"     → False
+"([)]"   → False</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Stack Solution</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Stack</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">is_valid</span>(s):
+    stack = []
+    mapping = {<span class="st">')'</span>: <span class="st">'('</span>, <span class="st">'}'</span>: <span class="st">'{'</span>, <span class="st">']'</span>: <span class="st">'['</span>}
+    
+    <span class="kw">for</span> char <span class="kw">in</span> s:
+        <span class="kw">if</span> char <span class="kw">in</span> mapping:
+            <span class="cm"># Closing bracket</span>
+            top = stack.pop() <span class="kw">if</span> stack <span class="kw">else</span> <span class="st">'#'</span>
+            <span class="kw">if</span> mapping[char] <span class="op">!=</span> top:
+                <span class="kw">return</span> False
+        <span class="kw">else</span>:
+            <span class="cm"># Opening bracket</span>
+            stack.append(char)
+    
+    <span class="kw">return</span> <span class="kw">not</span> stack  <span class="cm"># Stack must be empty</span></pre>
+    </div>
+  </div>
+  <div class="q-section"><div class="q-section-label">Complexity</div>
+    <table class="cx-table"><tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+    <tr><td>Stack</td><td class="cx-tc">O(n)</td><td class="cx-sc">O(n)</td></tr></table>
+  </div>
+</div>
+</div>
+
+<!-- Q12 Next Greater Element -->
+<div class="q-card" data-topic="stack" data-diff="medium" data-cat="product startup" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q12</span>
+  <div class="q-info">
+    <div class="q-title">Next Greater Element (Monotonic Stack)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Paytm</span><span class="company-tag">Samsung</span><span class="company-tag">Qualcomm</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">For each element, find the next greater element to its right. If no such element exists, output -1.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>[4, 5, 2, 10, 8]
+<span class="label">Output:</span>[5, 10, 10, -1, -1]</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Monotonic Stack O(n)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Monotonic Stack</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">next_greater</span>(nums):
+    result = [<span class="op">-</span><span class="nm">1</span>] <span class="op">*</span> len(nums)
+    stack = []  <span class="cm"># stores indices</span>
+    
+    <span class="kw">for</span> i, num <span class="kw">in</span> enumerate(nums):
+        <span class="cm"># While stack not empty and current > top of stack</span>
+        <span class="kw">while</span> stack <span class="kw">and</span> nums[stack[<span class="op">-</span><span class="nm">1</span>]] <span class="op"><</span> num:
+            idx = stack.pop()
+            result[idx] = num
+        stack.append(i)
+    
+    <span class="kw">return</span> result</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= TREES ======================= -->
+<div class="section-title" id="sec-tree"><span class="icon">🌳</span>Trees & BST</div>
+
+<!-- Q13 -->
+<div class="q-card" data-topic="tree" data-diff="easy" data-cat="service product faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q13</span>
+  <div class="q-info">
+    <div class="q-title">Binary Tree Inorder / Preorder / Postorder Traversal</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">Yash Technologies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Implement Inorder (Left-Root-Right), Preorder (Root-Left-Right), and Postorder (Left-Right-Root) traversal of a Binary Tree — both recursive and iterative.</div>
+    <div class="info-alert">🧠 Family tree sochlo: Inorder = siblings pehle, fir aap, fir right side. Preorder = aap pehle, fir baaki. BST ka Inorder always gives sorted output!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ All Traversals — Recursive</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Tree Traversals</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">class</span> <span class="fn">TreeNode</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, val=<span class="nm">0</span>):
+        self.val = val
+        self.left = self.right = None
+
+<span class="cm"># Inorder: Left → Root → Right (BST → sorted order)</span>
+<span class="dt">def</span> <span class="fn">inorder</span>(root):
+    <span class="kw">if</span> <span class="kw">not</span> root: <span class="kw">return</span> []
+    <span class="kw">return</span> inorder(root.left) <span class="op">+</span> [root.val] <span class="op">+</span> inorder(root.right)
+
+<span class="cm"># Preorder: Root → Left → Right</span>
+<span class="dt">def</span> <span class="fn">preorder</span>(root):
+    <span class="kw">if</span> <span class="kw">not</span> root: <span class="kw">return</span> []
+    <span class="kw">return</span> [root.val] <span class="op">+</span> preorder(root.left) <span class="op">+</span> preorder(root.right)
+
+<span class="cm"># Postorder: Left → Right → Root</span>
+<span class="dt">def</span> <span class="fn">postorder</span>(root):
+    <span class="kw">if</span> <span class="kw">not</span> root: <span class="kw">return</span> []
+    <span class="kw">return</span> postorder(root.left) <span class="op">+</span> postorder(root.right) <span class="op">+</span> [root.val]
+
+<span class="cm"># Level Order (BFS) — Very common!</span>
+<span class="kw">from</span> collections <span class="kw">import</span> deque
+<span class="dt">def</span> <span class="fn">level_order</span>(root):
+    <span class="kw">if</span> <span class="kw">not</span> root: <span class="kw">return</span> []
+    result, queue = [], deque([root])
+    <span class="kw">while</span> queue:
+        level = []
+        <span class="kw">for</span> _ <span class="kw">in</span> range(len(queue)):
+            node = queue.popleft()
+            level.append(node.val)
+            <span class="kw">if</span> node.left: queue.append(node.left)
+            <span class="kw">if</span> node.right: queue.append(node.right)
+        result.append(level)
+    <span class="kw">return</span> result</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q14 Max Depth -->
+<div class="q-card" data-topic="tree" data-diff="easy" data-cat="service product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q14</span>
+  <div class="q-info">
+    <div class="q-title">Maximum Depth of Binary Tree</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Wipro</span><span class="company-tag">Cognizant</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">✅ Recursive DFS</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">max_depth</span>(root):
+    <span class="kw">if</span> <span class="kw">not</span> root: <span class="kw">return</span> <span class="nm">0</span>
+    <span class="kw">return</span> <span class="nm">1</span> <span class="op">+</span> max(max_depth(root.left), max_depth(root.right))
+
+<span class="cm"># Iterative BFS (Level by Level)</span>
+<span class="dt">def</span> <span class="fn">max_depth_bfs</span>(root):
+    <span class="kw">if</span> <span class="kw">not</span> root: <span class="kw">return</span> <span class="nm">0</span>
+    queue, depth = deque([root]), <span class="nm">0</span>
+    <span class="kw">while</span> queue:
+        depth <span class="op">+=</span> <span class="nm">1</span>
+        <span class="kw">for</span> _ <span class="kw">in</span> range(len(queue)):
+            node = queue.popleft()
+            <span class="kw">if</span> node.left: queue.append(node.left)
+            <span class="kw">if</span> node.right: queue.append(node.right)
+    <span class="kw">return</span> depth</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q15 Lowest Common Ancestor -->
+<div class="q-card" data-topic="tree" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q15</span>
+  <div class="q-info">
+    <div class="q-title">Lowest Common Ancestor of BST</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Facebook</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given a BST, find the lowest common ancestor (LCA) of two given nodes p and q. LCA is the lowest node in the tree that has both p and q as descendants.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ BST Property Solution</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — BST LCA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">lca_bst</span>(root, p, q):
+    <span class="cm"># In BST: if both < root → go left, both > root → go right</span>
+    <span class="kw">if</span> p.val <span class="op"><</span> root.val <span class="kw">and</span> q.val <span class="op"><</span> root.val:
+        <span class="kw">return</span> lca_bst(root.left, p, q)
+    <span class="kw">elif</span> p.val <span class="op">></span> root.val <span class="kw">and</span> q.val <span class="op">></span> root.val:
+        <span class="kw">return</span> lca_bst(root.right, p, q)
+    <span class="kw">else</span>:
+        <span class="kw">return</span> root  <span class="cm"># Split point = LCA</span>
+
+<span class="cm"># General Binary Tree LCA (not BST)</span>
+<span class="dt">def</span> <span class="fn">lca_bt</span>(root, p, q):
+    <span class="kw">if</span> <span class="kw">not</span> root <span class="kw">or</span> root <span class="op">==</span> p <span class="kw">or</span> root <span class="op">==</span> q:
+        <span class="kw">return</span> root
+    left = lca_bt(root.left, p, q)
+    right = lca_bt(root.right, p, q)
+    <span class="kw">return</span> root <span class="kw">if</span> left <span class="kw">and</span> right <span class="kw">else</span> left <span class="kw">or</span> right</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= DYNAMIC PROGRAMMING ======================= -->
+<div class="section-title" id="sec-dp"><span class="icon">💡</span>Dynamic Programming</div>
+
+<!-- Q16 Fibonacci -->
+<div class="q-card" data-topic="dp recursion" data-diff="easy" data-cat="service product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q16</span>
+  <div class="q-info">
+    <div class="q-title">Fibonacci — Memoization vs Tabulation</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Wipro</span><span class="company-tag">Amazon</span><span class="company-tag">All Companies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Calculate the nth Fibonacci number. F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2). This is the gateway to understanding DP — from exponential to linear!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>n = 10  →  Output: 55
+<span class="label">Input:</span>n = 6   →  Output: 8  (0,1,1,2,3,5,8)</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ All 4 Approaches</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — 4 Approaches</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="cm"># 1. Naive Recursion — O(2^n) ❌ Very Slow</span>
+<span class="dt">def</span> <span class="fn">fib_naive</span>(n):
+    <span class="kw">if</span> n <span class="op"><=</span> <span class="nm">1</span>: <span class="kw">return</span> n
+    <span class="kw">return</span> fib_naive(n<span class="op">-</span><span class="nm">1</span>) <span class="op">+</span> fib_naive(n<span class="op">-</span><span class="nm">2</span>)
+
+<span class="cm"># 2. Memoization (Top-Down DP) — O(n)</span>
+<span class="dt">def</span> <span class="fn">fib_memo</span>(n, memo={}):
+    <span class="kw">if</span> n <span class="kw">in</span> memo: <span class="kw">return</span> memo[n]
+    <span class="kw">if</span> n <span class="op"><=</span> <span class="nm">1</span>: <span class="kw">return</span> n
+    memo[n] = fib_memo(n<span class="op">-</span><span class="nm">1</span>, memo) <span class="op">+</span> fib_memo(n<span class="op">-</span><span class="nm">2</span>, memo)
+    <span class="kw">return</span> memo[n]
+
+<span class="cm"># 3. Tabulation (Bottom-Up DP) — O(n) time, O(n) space</span>
+<span class="dt">def</span> <span class="fn">fib_tab</span>(n):
+    <span class="kw">if</span> n <span class="op"><=</span> <span class="nm">1</span>: <span class="kw">return</span> n
+    dp = [<span class="nm">0</span>] <span class="op">*</span> (n<span class="op">+</span><span class="nm">1</span>)
+    dp[<span class="nm">1</span>] = <span class="nm">1</span>
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">2</span>, n<span class="op">+</span><span class="nm">1</span>):
+        dp[i] = dp[i<span class="op">-</span><span class="nm">1</span>] <span class="op">+</span> dp[i<span class="op">-</span><span class="nm">2</span>]
+    <span class="kw">return</span> dp[n]
+
+<span class="cm"># 4. Space Optimized — O(n) time, O(1) space ✅ Best</span>
+<span class="dt">def</span> <span class="fn">fib_opt</span>(n):
+    <span class="kw">if</span> n <span class="op"><=</span> <span class="nm">1</span>: <span class="kw">return</span> n
+    a, b = <span class="nm">0</span>, <span class="nm">1</span>
+    <span class="kw">for</span> _ <span class="kw">in</span> range(n<span class="op">-</span><span class="nm">1</span>):
+        a, b = b, a<span class="op">+</span>b
+    <span class="kw">return</span> b</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q17 0/1 Knapsack -->
+<div class="q-card" data-topic="dp" data-diff="medium" data-cat="product service faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q17</span>
+  <div class="q-info">
+    <div class="q-title">0/1 Knapsack Problem</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">TCS Ninja</span><span class="company-tag">Persistent</span><span class="company-tag">Flipkart</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given n items with weights and values, and a knapsack with capacity W, find the maximum value you can put in the knapsack. Each item can be taken at most once (0 or 1).</div>
+    <div class="info-alert">🧠 Thief ki tarah sochlo! Bag mein limited weight uthaa sakte ho — kaunse items utha lo maximum value ke liye?</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>weights=[2,3,4,5], values=[3,4,5,6], W=5
+<span class="label">Output:</span>7  (items with weight 2 and 3: value 3+4=7)</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ DP Table Solution O(n×W)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — 0/1 Knapsack DP</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">knapsack</span>(weights, values, W):
+    n = len(weights)
+    <span class="cm"># dp[i][w] = max value using first i items with capacity w</span>
+    dp = [[<span class="nm">0</span>] <span class="op">*</span> (W<span class="op">+</span><span class="nm">1</span>) <span class="kw">for</span> _ <span class="kw">in</span> range(n<span class="op">+</span><span class="nm">1</span>)]
+    
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">1</span>, n<span class="op">+</span><span class="nm">1</span>):
+        <span class="kw">for</span> w <span class="kw">in</span> range(W<span class="op">+</span><span class="nm">1</span>):
+            <span class="cm"># Don't take item i</span>
+            dp[i][w] = dp[i<span class="op">-</span><span class="nm">1</span>][w]
+            <span class="cm"># Take item i (if it fits)</span>
+            <span class="kw">if</span> weights[i<span class="op">-</span><span class="nm">1</span>] <span class="op"><=</span> w:
+                dp[i][w] = max(dp[i][w], 
+                    dp[i<span class="op">-</span><span class="nm">1</span>][w<span class="op">-</span>weights[i<span class="op">-</span><span class="nm">1</span>]] <span class="op">+</span> values[i<span class="op">-</span><span class="nm">1</span>])
+    
+    <span class="kw">return</span> dp[n][W]</pre>
+    </div>
+  </div>
+  <div class="q-section"><div class="q-section-label">Complexity</div>
+    <table class="cx-table"><tr><th>Approach</th><th>Time</th><th>Space</th></tr>
+    <tr><td>Recursion (Brute)</td><td class="cx-tc">O(2^n)</td><td class="cx-sc">O(n)</td></tr>
+    <tr><td>Memoization</td><td class="cx-tc">O(n×W)</td><td class="cx-sc">O(n×W)</td></tr>
+    <tr><td>Tabulation (DP)</td><td class="cx-tc">O(n×W)</td><td class="cx-sc">O(n×W)</td></tr></table>
+  </div>
+</div>
+</div>
+
+<!-- Q18 LCS -->
+<div class="q-card" data-topic="dp" data-diff="medium" data-cat="product faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q18</span>
+  <div class="q-info">
+    <div class="q-title">Longest Common Subsequence (LCS)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Flipkart</span><span class="company-tag">Oracle</span><span class="company-tag">Zoho</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given two strings, find the length of their Longest Common Subsequence. A subsequence keeps order but elements don't need to be contiguous.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>s1 = "ABCBDAB", s2 = "BDCAB"
+<span class="label">Output:</span>4  →  LCS = "BCAB" or "BDAB"</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ DP Solution O(m×n)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — LCS DP</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">lcs</span>(s1, s2):
+    m, n = len(s1), len(s2)
+    dp = [[<span class="nm">0</span>] <span class="op">*</span> (n<span class="op">+</span><span class="nm">1</span>) <span class="kw">for</span> _ <span class="kw">in</span> range(m<span class="op">+</span><span class="nm">1</span>)]
+    
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">1</span>, m<span class="op">+</span><span class="nm">1</span>):
+        <span class="kw">for</span> j <span class="kw">in</span> range(<span class="nm">1</span>, n<span class="op">+</span><span class="nm">1</span>):
+            <span class="kw">if</span> s1[i<span class="op">-</span><span class="nm">1</span>] <span class="op">==</span> s2[j<span class="op">-</span><span class="nm">1</span>]:
+                dp[i][j] = dp[i<span class="op">-</span><span class="nm">1</span>][j<span class="op">-</span><span class="nm">1</span>] <span class="op">+</span> <span class="nm">1</span>
+            <span class="kw">else</span>:
+                dp[i][j] = max(dp[i<span class="op">-</span><span class="nm">1</span>][j], dp[i][j<span class="op">-</span><span class="nm">1</span>])
+    
+    <span class="kw">return</span> dp[m][n]</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q19 Coin Change -->
+<div class="q-card" data-topic="dp" data-diff="medium" data-cat="faang product startup" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q19</span>
+  <div class="q-info">
+    <div class="q-title">Coin Change — Minimum Coins</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Paytm</span><span class="company-tag">Razorpay</span><span class="company-tag">PhonePe</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given coins of different denominations and a target amount, find the minimum number of coins needed to make up that amount.</div>
+    <div class="info-alert">🧠 ATM machine! ₹11 chahiye, coins = [1, 5, 6, 9] → minimum: 9+1+1 = 3 coins. Greedy fails! DP use karo.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>coins = [1, 5, 6, 9], amount = 11
+<span class="label">Output:</span>2  →  6 + 5 = 11</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Bottom-Up DP</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Coin Change DP</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">coin_change</span>(coins, amount):
+    dp = [float(<span class="st">'inf'</span>)] <span class="op">*</span> (amount <span class="op">+</span> <span class="nm">1</span>)
+    dp[<span class="nm">0</span>] = <span class="nm">0</span>  <span class="cm"># 0 coins for amount 0</span>
+    
+    <span class="kw">for</span> coin <span class="kw">in</span> coins:
+        <span class="kw">for</span> amt <span class="kw">in</span> range(coin, amount <span class="op">+</span> <span class="nm">1</span>):
+            dp[amt] = min(dp[amt], dp[amt <span class="op">-</span> coin] <span class="op">+</span> <span class="nm">1</span>)
+    
+    <span class="kw">return</span> dp[amount] <span class="kw">if</span> dp[amount] <span class="op">!=</span> float(<span class="st">'inf'</span>) <span class="kw">else</span> <span class="op">-</span><span class="nm">1</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q20 Longest Increasing Subsequence -->
+<div class="q-card" data-topic="dp" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q20</span>
+  <div class="q-info">
+    <div class="q-title">Longest Increasing Subsequence (LIS)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">Meesho</span><span class="company-tag">Groww</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Find the length of the longest strictly increasing subsequence in an array.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>[10, 9, 2, 5, 3, 7, 101, 18]
+<span class="label">Output:</span>4  →  [2, 3, 7, 101]</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ DP O(n²) + Binary Search O(n log n)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Both Approaches</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="cm"># O(n²) DP</span>
+<span class="dt">def</span> <span class="fn">lis_dp</span>(nums):
+    n = len(nums)
+    dp = [<span class="nm">1</span>] <span class="op">*</span> n  <span class="cm"># each element is LIS of length 1</span>
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">1</span>, n):
+        <span class="kw">for</span> j <span class="kw">in</span> range(i):
+            <span class="kw">if</span> nums[j] <span class="op"><</span> nums[i]:
+                dp[i] = max(dp[i], dp[j] <span class="op">+</span> <span class="nm">1</span>)
+    <span class="kw">return</span> max(dp)
+
+<span class="cm"># O(n log n) Binary Search (Patience Sorting)</span>
+<span class="kw">import</span> bisect
+<span class="dt">def</span> <span class="fn">lis_optimal</span>(nums):
+    tails = []
+    <span class="kw">for</span> num <span class="kw">in</span> nums:
+        pos = bisect.bisect_left(tails, num)
+        <span class="kw">if</span> pos <span class="op">==</span> len(tails):
+            tails.append(num)
+        <span class="kw">else</span>:
+            tails[pos] = num
+    <span class="kw">return</span> len(tails)</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= GRAPHS ======================= -->
+<div class="section-title" id="sec-graph"><span class="icon">🕸️</span>Graphs</div>
+
+<!-- Q21 BFS/DFS -->
+<div class="q-card" data-topic="graph" data-diff="easy" data-cat="faang product service" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q21</span>
+  <div class="q-info">
+    <div class="q-title">BFS and DFS — Graph Traversal</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Uber</span><span class="company-tag">Ola</span><span class="company-tag">Swiggy</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Implement BFS (Breadth-First Search) and DFS (Depth-First Search) for a graph. Return traversal order. Given adjacency list representation.</div>
+    <div class="info-alert">🧠 BFS = level by level (pehle saare friends, fir friends-of-friends) — Facebook friend suggestions! DFS = ek path tak jaao (maze solving). Swiggy delivery route optimization!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ BFS + DFS Implementation</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — BFS & DFS</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="cm"># BFS — Queue based</span>
+<span class="dt">def</span> <span class="fn">bfs</span>(graph, start):
+    visited = {start}
+    queue = deque([start])
+    order = []
+    
+    <span class="kw">while</span> queue:
+        node = queue.popleft()
+        order.append(node)
+        <span class="kw">for</span> neighbor <span class="kw">in</span> graph[node]:
+            <span class="kw">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+    <span class="kw">return</span> order
+
+<span class="cm"># DFS — Recursive</span>
+<span class="dt">def</span> <span class="fn">dfs</span>(graph, node, visited=None):
+    <span class="kw">if</span> visited <span class="kw">is</span> None: visited = set()
+    visited.add(node)
+    order = [node]
+    <span class="kw">for</span> neighbor <span class="kw">in</span> graph[node]:
+        <span class="kw">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> visited:
+            order.extend(dfs(graph, neighbor, visited))
+    <span class="kw">return</span> order
+
+<span class="cm"># DFS — Iterative (Stack)</span>
+<span class="dt">def</span> <span class="fn">dfs_iterative</span>(graph, start):
+    visited, stack, order = set(), [start], []
+    <span class="kw">while</span> stack:
+        node = stack.pop()
+        <span class="kw">if</span> node <span class="kw">not</span> <span class="kw">in</span> visited:
+            visited.add(node)
+            order.append(node)
+            stack.extend(graph[node])
+    <span class="kw">return</span> order
+
+<span class="cm"># Test</span>
+graph = {<span class="nm">0</span>: [<span class="nm">1</span>,<span class="nm">2</span>], <span class="nm">1</span>: [<span class="nm">0</span>,<span class="nm">3</span>], <span class="nm">2</span>: [<span class="nm">0</span>,<span class="nm">4</span>], <span class="nm">3</span>: [<span class="nm">1</span>], <span class="nm">4</span>: [<span class="nm">2</span>]}
+print(bfs(graph, <span class="nm">0</span>))  <span class="cm"># [0, 1, 2, 3, 4]</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q22 Number of Islands -->
+<div class="q-card" data-topic="graph" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q22</span>
+  <div class="q-info">
+    <div class="q-title">Number of Islands</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Bloomberg</span><span class="company-tag">Zoho</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given a 2D grid of '1' (land) and '0' (water), count the number of islands. An island is surrounded by water and formed by connecting adjacent lands horizontally/vertically.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>
+11110
+11010
+11000
+00000
+<span class="label">Output:</span>1 island
+
+11000
+11000
+00100
+00011
+<span class="label">Output:</span>3 islands</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ DFS Flood Fill</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — DFS Grid</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">num_islands</span>(grid):
+    <span class="kw">if</span> <span class="kw">not</span> grid: <span class="kw">return</span> <span class="nm">0</span>
+    rows, cols = len(grid), len(grid[<span class="nm">0</span>])
+    count = <span class="nm">0</span>
+    
+    <span class="dt">def</span> <span class="fn">dfs</span>(r, c):
+        <span class="kw">if</span> r <span class="op"><</span> <span class="nm">0</span> <span class="kw">or</span> r <span class="op">>=</span> rows <span class="kw">or</span> c <span class="op"><</span> <span class="nm">0</span> <span class="kw">or</span> c <span class="op">>=</span> cols:
+            <span class="kw">return</span>
+        <span class="kw">if</span> grid[r][c] <span class="op">!=</span> <span class="st">'1'</span>: <span class="kw">return</span>
+        grid[r][c] = <span class="st">'#'</span>  <span class="cm"># Mark as visited</span>
+        dfs(r<span class="op">+</span><span class="nm">1</span>,c); dfs(r<span class="op">-</span><span class="nm">1</span>,c); dfs(r,c<span class="op">+</span><span class="nm">1</span>); dfs(r,c<span class="op">-</span><span class="nm">1</span>)
+    
+    <span class="kw">for</span> r <span class="kw">in</span> range(rows):
+        <span class="kw">for</span> c <span class="kw">in</span> range(cols):
+            <span class="kw">if</span> grid[r][c] <span class="op">==</span> <span class="st">'1'</span>:
+                dfs(r, c)
+                count <span class="op">+=</span> <span class="nm">1</span>
+    <span class="kw">return</span> count</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= SORTING ======================= -->
+<div class="section-title" id="sec-sorting"><span class="icon">🔃</span>Sorting & Searching</div>
+
+<!-- Q23 -->
+<div class="q-card" data-topic="sorting" data-diff="easy" data-cat="service product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q23</span>
+  <div class="q-info">
+    <div class="q-title">Merge Sort — Implementation + Analysis</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">All Companies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Implement Merge Sort. Also explain when to use it vs Quick Sort. Merge Sort is stable, guaranteed O(n log n), preferred for linked lists and external sorting.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Merge Sort Implementation</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Merge Sort</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">merge_sort</span>(arr):
+    <span class="kw">if</span> len(arr) <span class="op"><=</span> <span class="nm">1</span>: <span class="kw">return</span> arr
+    
+    mid = len(arr) <span class="op">//</span> <span class="nm">2</span>
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    
+    <span class="kw">return</span> merge(left, right)
+
+<span class="dt">def</span> <span class="fn">merge</span>(left, right):
+    result = []
+    i = j = <span class="nm">0</span>
+    
+    <span class="kw">while</span> i <span class="op"><</span> len(left) <span class="kw">and</span> j <span class="op"><</span> len(right):
+        <span class="kw">if</span> left[i] <span class="op"><=</span> right[j]:
+            result.append(left[i]); i <span class="op">+=</span> <span class="nm">1</span>
+        <span class="kw">else</span>:
+            result.append(right[j]); j <span class="op">+=</span> <span class="nm">1</span>
+    
+    result.extend(left[i:])
+    result.extend(right[j:])
+    <span class="kw">return</span> result
+
+<span class="cm"># Complexity: Time O(n log n), Space O(n)</span>
+<span class="cm"># Stable Sort — equal elements maintain relative order</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q24 Binary Search -->
+<div class="q-card" data-topic="sorting" data-diff="easy" data-cat="service product faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q24</span>
+  <div class="q-info">
+    <div class="q-title">Binary Search — Variations</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">TCS NQT</span><span class="company-tag">Infosys</span><span class="company-tag">All Companies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Implement binary search and its variations: find first occurrence, last occurrence, and search in rotated sorted array.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Binary Search + Variations</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Binary Search Variations</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="cm"># Standard Binary Search O(log n)</span>
+<span class="dt">def</span> <span class="fn">binary_search</span>(arr, target):
+    left, right = <span class="nm">0</span>, len(arr) <span class="op">-</span> <span class="nm">1</span>
+    <span class="kw">while</span> left <span class="op"><=</span> right:
+        mid = left <span class="op">+</span> (right <span class="op">-</span> left) <span class="op">//</span> <span class="nm">2</span>  <span class="cm"># Avoids overflow</span>
+        <span class="kw">if</span> arr[mid] <span class="op">==</span> target: <span class="kw">return</span> mid
+        <span class="kw">elif</span> arr[mid] <span class="op"><</span> target: left = mid <span class="op">+</span> <span class="nm">1</span>
+        <span class="kw">else</span>: right = mid <span class="op">-</span> <span class="nm">1</span>
+    <span class="kw">return</span> <span class="op">-</span><span class="nm">1</span>
+
+<span class="cm"># Search in Rotated Sorted Array (VERY COMMON)</span>
+<span class="dt">def</span> <span class="fn">search_rotated</span>(nums, target):
+    left, right = <span class="nm">0</span>, len(nums) <span class="op">-</span> <span class="nm">1</span>
+    <span class="kw">while</span> left <span class="op"><=</span> right:
+        mid = (left <span class="op">+</span> right) <span class="op">//</span> <span class="nm">2</span>
+        <span class="kw">if</span> nums[mid] <span class="op">==</span> target: <span class="kw">return</span> mid
+        <span class="cm"># Left half is sorted</span>
+        <span class="kw">if</span> nums[left] <span class="op"><=</span> nums[mid]:
+            <span class="kw">if</span> nums[left] <span class="op"><=</span> target <span class="op"><</span> nums[mid]:
+                right = mid <span class="op">-</span> <span class="nm">1</span>
+            <span class="kw">else</span>:
+                left = mid <span class="op">+</span> <span class="nm">1</span>
+        <span class="kw">else</span>:  <span class="cm"># Right half is sorted</span>
+            <span class="kw">if</span> nums[mid] <span class="op"><</span> target <span class="op"><=</span> nums[right]:
+                left = mid <span class="op">+</span> <span class="nm">1</span>
+            <span class="kw">else</span>:
+                right = mid <span class="op">-</span> <span class="nm">1</span>
+    <span class="kw">return</span> <span class="op">-</span><span class="nm">1</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= SLIDING WINDOW ======================= -->
+<div class="section-title" id="sec-sliding"><span class="icon">🪟</span>Sliding Window</div>
+
+<!-- Q25 -->
+<div class="q-card" data-topic="sliding" data-diff="medium" data-cat="product faang startup" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q25</span>
+  <div class="q-info">
+    <div class="q-title">Maximum Sum of Subarray of Size K</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Freshworks</span><span class="company-tag">Zoho</span><span class="company-tag">Paytm</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given an array and integer k, find the maximum sum of any contiguous subarray of size k.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Sliding Window O(n)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Sliding Window</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">max_sum_subarray</span>(arr, k):
+    <span class="cm"># Initialize first window</span>
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    
+    <span class="cm"># Slide the window</span>
+    <span class="kw">for</span> i <span class="kw">in</span> range(k, len(arr)):
+        window_sum <span class="op">+=</span> arr[i] <span class="op">-</span> arr[i<span class="op">-</span>k]  <span class="cm"># Add new, remove old</span>
+        max_sum = max(max_sum, window_sum)
+    
+    <span class="kw">return</span> max_sum
+<span class="cm"># Time: O(n), Space: O(1) — Much better than O(n²) brute!</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= BACKTRACKING ======================= -->
+<div class="section-title" id="sec-backtrack"><span class="icon">🔙</span>Backtracking</div>
+
+<!-- Q26 Subsets -->
+<div class="q-card" data-topic="backtrack" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q26</span>
+  <div class="q-info">
+    <div class="q-title">Generate All Subsets (Power Set)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">✅ Backtracking Solution</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Subsets via Backtracking</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">subsets</span>(nums):
+    result = []
+    
+    <span class="dt">def</span> <span class="fn">backtrack</span>(start, current):
+        result.append(current[:])  <span class="cm"># Add copy of current subset</span>
+        <span class="kw">for</span> i <span class="kw">in</span> range(start, len(nums)):
+            current.append(nums[i])
+            backtrack(i<span class="op">+</span><span class="nm">1</span>, current)
+            current.pop()  <span class="cm"># Undo choice (backtrack)</span>
+    
+    backtrack(<span class="nm">0</span>, [])
+    <span class="kw">return</span> result
+
+<span class="cm"># nums=[1,2,3] → [[], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]]</span>
+<span class="cm"># Total subsets = 2^n</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q27 N-Queens -->
+<div class="q-card" data-topic="backtrack" data-diff="hard" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q27</span>
+  <div class="q-info">
+    <div class="q-title">N-Queens Problem</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Google</span><span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">Adobe</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Place n queens on an n×n chessboard such that no two queens attack each other. Return all valid placements.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Backtracking</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — N-Queens</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">solve_n_queens</span>(n):
+    results = []
+    cols = set()
+    diag1 = set()  <span class="cm"># r - c</span>
+    diag2 = set()  <span class="cm"># r + c</span>
+    board = [<span class="st">'.'</span> <span class="op">*</span> n <span class="kw">for</span> _ <span class="kw">in</span> range(n)]
+    
+    <span class="dt">def</span> <span class="fn">backtrack</span>(row):
+        <span class="kw">if</span> row <span class="op">==</span> n:
+            results.append(board[:])
+            <span class="kw">return</span>
+        <span class="kw">for</span> col <span class="kw">in</span> range(n):
+            <span class="kw">if</span> col <span class="kw">in</span> cols <span class="kw">or</span> (row<span class="op">-</span>col) <span class="kw">in</span> diag1 <span class="kw">or</span> (row<span class="op">+</span>col) <span class="kw">in</span> diag2:
+                <span class="kw">continue</span>
+            <span class="cm"># Place queen</span>
+            cols.add(col); diag1.add(row<span class="op">-</span>col); diag2.add(row<span class="op">+</span>col)
+            board[row] = <span class="st">'.'</span><span class="op">*</span>col <span class="op">+</span> <span class="st">'Q'</span> <span class="op">+</span> <span class="st">'.'</span><span class="op">*</span>(n<span class="op">-</span>col<span class="op">-</span><span class="nm">1</span>)
+            backtrack(row <span class="op">+</span> <span class="nm">1</span>)
+            <span class="cm"># Remove queen</span>
+            cols.remove(col); diag1.remove(row<span class="op">-</span>col); diag2.remove(row<span class="op">+</span>col)
+    
+    backtrack(<span class="nm">0</span>)
+    <span class="kw">return</span> results</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= HEAP ======================= -->
+<div class="section-title" id="sec-heap"><span class="icon">⛰️</span>Heap / Priority Queue</div>
+
+<!-- Q28 -->
+<div class="q-card" data-topic="heap" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q28</span>
+  <div class="q-info">
+    <div class="q-title">K Largest Elements in Array</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">Google</span><span class="company-tag">Flipkart</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Find K largest elements in an array. Multiple approaches with different complexities.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Min-Heap of Size K</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Heap Solutions</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">import</span> heapq
+
+<span class="cm"># Method 1: nlargest (Pythonic)</span>
+<span class="dt">def</span> <span class="fn">k_largest_1</span>(nums, k):
+    <span class="kw">return</span> heapq.nlargest(k, nums)  <span class="cm"># O(n log k)</span>
+
+<span class="cm"># Method 2: Min-heap of size k</span>
+<span class="dt">def</span> <span class="fn">k_largest_2</span>(nums, k):
+    heap = nums[:k]
+    heapq.heapify(heap)  <span class="cm"># Min-heap</span>
+    
+    <span class="kw">for</span> num <span class="kw">in</span> nums[k:]:
+        <span class="kw">if</span> num <span class="op">></span> heap[<span class="nm">0</span>]:
+            heapq.heapreplace(heap, num)
+    
+    <span class="kw">return</span> sorted(heap, reverse=True)
+
+<span class="cm"># Kth Largest Element (Very Common Interview Q)</span>
+<span class="dt">def</span> <span class="fn">kth_largest</span>(nums, k):
+    <span class="kw">return</span> heapq.nlargest(k, nums)[<span class="op">-</span><span class="nm">1</span>]  <span class="cm"># O(n log k)</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= GREEDY ======================= -->
+<div class="section-title" id="sec-greedy"><span class="icon">🤑</span>Greedy Algorithms</div>
+
+<!-- Q29 Activity Selection -->
+<div class="q-card" data-topic="greedy" data-diff="medium" data-cat="product service" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q29</span>
+  <div class="q-info">
+    <div class="q-title">Activity Selection Problem / Meeting Rooms</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">TCS</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given n activities with start and finish times, select maximum number of activities a single person can perform. No two activities overlap.</div>
+    <div class="info-alert">🧠 Interview scheduling! Calendar mein maximum meetings kaise fit karo?</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Greedy — Sort by End Time</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Activity Selection</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">activity_selection</span>(start, finish):
+    <span class="cm"># Sort by finish time (Greedy choice)</span>
+    activities = sorted(zip(start, finish), key=<span class="kw">lambda</span> x: x[<span class="nm">1</span>])
+    
+    selected = [activities[<span class="nm">0</span>]]
+    last_finish = activities[<span class="nm">0</span>][<span class="nm">1</span>]
+    
+    <span class="kw">for</span> s, f <span class="kw">in</span> activities[<span class="nm">1</span>:]:
+        <span class="kw">if</span> s <span class="op">>=</span> last_finish:  <span class="cm"># No overlap</span>
+            selected.append((s, f))
+            last_finish = f
+    
+    <span class="kw">return</span> len(selected), selected
+
+<span class="cm"># Meeting Rooms II — Minimum rooms needed</span>
+<span class="dt">def</span> <span class="fn">min_meeting_rooms</span>(intervals):
+    <span class="kw">if</span> <span class="kw">not</span> intervals: <span class="kw">return</span> <span class="nm">0</span>
+    starts = sorted(i[<span class="nm">0</span>] <span class="kw">for</span> i <span class="kw">in</span> intervals)
+    ends = sorted(i[<span class="nm">1</span>] <span class="kw">for</span> i <span class="kw">in</span> intervals)
+    rooms = used = <span class="nm">0</span>
+    e = <span class="nm">0</span>
+    <span class="kw">for</span> s <span class="kw">in</span> starts:
+        <span class="kw">if</span> s <span class="op"><</span> ends[e]:
+            rooms <span class="op">+=</span> <span class="nm">1</span>
+        <span class="kw">else</span>:
+            e <span class="op">+=</span> <span class="nm">1</span>
+        used = max(used, rooms)
+    <span class="kw">return</span> used</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= BIT MANIPULATION ======================= -->
+<div class="section-title" id="sec-bit"><span class="icon">🔢</span>Bit Manipulation</div>
+
+<!-- Q30 -->
+<div class="q-card" data-topic="bit" data-diff="easy" data-cat="product faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q30</span>
+  <div class="q-info">
+    <div class="q-title">Single Number — Find element appearing once</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Adobe</span><span class="company-tag">Samsung</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">In an array where every element appears twice except one, find the single element. Solve in O(n) time and O(1) space.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ XOR Magic</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — XOR Solution</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">single_number</span>(nums):
+    result = <span class="nm">0</span>
+    <span class="kw">for</span> num <span class="kw">in</span> nums:
+        result <span class="op">^=</span> num  <span class="cm"># XOR: a^a=0, a^0=a</span>
+    <span class="kw">return</span> result
+
+<span class="cm"># Key: XOR same number = 0, XOR with 0 = itself</span>
+<span class="cm"># [4,1,2,1,2] → 4^1^2^1^2 = 4^(1^1)^(2^2) = 4^0^0 = 4</span>
+
+<span class="cm"># Bit tricks to remember:</span>
+<span class="cm"># Check if even: n & 1 == 0</span>
+<span class="cm"># Check if power of 2: n & (n-1) == 0</span>
+<span class="cm"># Count set bits: bin(n).count('1')</span>
+<span class="cm"># Swap without temp: a, b = a^b, a^b^b → same as a, b = b, a</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= TRIE ======================= -->
+<div class="section-title" id="sec-trie"><span class="icon">🌐</span>Trie</div>
+
+<!-- Q31 -->
+<div class="q-card" data-topic="trie" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q31</span>
+  <div class="q-info">
+    <div class="q-title">Implement Trie (Prefix Tree)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Atlassian</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Implement a Trie with insert, search, and startsWith methods. Used in autocomplete, spell checkers, IP routing.</div>
+    <div class="info-alert">🧠 Google search bar ka autocomplete! Jab tum "Ind" type karte ho, "India", "Indonesia", "Indore" suggest hoti hai — Trie se!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Trie Implementation</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Trie</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">class</span> <span class="fn">TrieNode</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self):
+        self.children = {}
+        self.is_end = False
+
+<span class="dt">class</span> <span class="fn">Trie</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self):
+        self.root = TrieNode()
+    
+    <span class="dt">def</span> <span class="fn">insert</span>(self, word):
+        node = self.root
+        <span class="kw">for</span> char <span class="kw">in</span> word:
+            <span class="kw">if</span> char <span class="kw">not</span> <span class="kw">in</span> node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end = True
+    
+    <span class="dt">def</span> <span class="fn">search</span>(self, word):
+        node = self.root
+        <span class="kw">for</span> char <span class="kw">in</span> word:
+            <span class="kw">if</span> char <span class="kw">not</span> <span class="kw">in</span> node.children:
+                <span class="kw">return</span> False
+            node = node.children[char]
+        <span class="kw">return</span> node.is_end
+    
+    <span class="dt">def</span> <span class="fn">starts_with</span>(self, prefix):
+        node = self.root
+        <span class="kw">for</span> char <span class="kw">in</span> prefix:
+            <span class="kw">if</span> char <span class="kw">not</span> <span class="kw">in</span> node.children:
+                <span class="kw">return</span> False
+            node = node.children[char]
+        <span class="kw">return</span> True
+
+<span class="cm"># Time: O(L) per operation where L = word length</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= SQL ======================= -->
+<div class="section-title" id="sec-sql"><span class="icon">🗄️</span>SQL Interview Questions</div>
+
+<!-- Q32-41 SQL -->
+<div class="q-card" data-topic="sql" data-diff="easy" data-cat="service product indore" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q32-41</span>
+  <div class="q-info">
+    <div class="q-title">Top SQL Interview Questions — All Levels</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">Easy→Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Wipro</span><span class="company-tag">All Companies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">SQL Questions with Solutions</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">SQL — Top Interview Queries</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="cm">-- Q32: Second Highest Salary (Very Common!)</span>
+<span class="kw">SELECT</span> MAX(salary) <span class="kw">AS</span> SecondHighest
+<span class="kw">FROM</span> Employee
+<span class="kw">WHERE</span> salary <span class="op"><</span> (<span class="kw">SELECT</span> MAX(salary) <span class="kw">FROM</span> Employee);
+
+<span class="cm">-- Alternative with LIMIT</span>
+<span class="kw">SELECT</span> DISTINCT salary
+<span class="kw">FROM</span> Employee
+<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> <span class="nm">1</span> OFFSET <span class="nm">1</span>;
+
+<span class="cm">-- Q33: Nth Highest Salary (using DENSE_RANK)</span>
+<span class="kw">SELECT</span> salary <span class="kw">FROM</span> (
+    <span class="kw">SELECT</span> salary, DENSE_RANK() <span class="kw">OVER</span>(<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> rnk
+    <span class="kw">FROM</span> Employee
+) ranked
+<span class="kw">WHERE</span> rnk = N;
+
+<span class="cm">-- Q34: Employees who earn more than their manager</span>
+<span class="kw">SELECT</span> e.name
+<span class="kw">FROM</span> Employee e
+<span class="kw">JOIN</span> Employee m <span class="kw">ON</span> e.managerId = m.id
+<span class="kw">WHERE</span> e.salary <span class="op">></span> m.salary;
+
+<span class="cm">-- Q35: Find duplicate emails</span>
+<span class="kw">SELECT</span> email <span class="kw">FROM</span> Person
+<span class="kw">GROUP BY</span> email
+<span class="kw">HAVING COUNT</span>(email) <span class="op">></span> <span class="nm">1</span>;
+
+<span class="cm">-- Q36: Department-wise highest salary</span>
+<span class="kw">SELECT</span> d.name <span class="kw">AS</span> Department, e.name <span class="kw">AS</span> Employee, e.salary
+<span class="kw">FROM</span> Employee e
+<span class="kw">JOIN</span> Department d <span class="kw">ON</span> e.departmentId = d.id
+<span class="kw">WHERE</span> (e.departmentId, e.salary) <span class="kw">IN</span> (
+    <span class="kw">SELECT</span> departmentId, MAX(salary) <span class="kw">FROM</span> Employee <span class="kw">GROUP BY</span> departmentId
+);
+
+<span class="cm">-- Q37: Customers who never ordered</span>
+<span class="kw">SELECT</span> name <span class="kw">FROM</span> Customers
+<span class="kw">WHERE</span> id <span class="kw">NOT IN</span> (<span class="kw">SELECT DISTINCT</span> customerId <span class="kw">FROM</span> Orders);
+
+<span class="cm">-- Better with LEFT JOIN:</span>
+<span class="kw">SELECT</span> c.name <span class="kw">FROM</span> Customers c
+<span class="kw">LEFT JOIN</span> Orders o <span class="kw">ON</span> c.id = o.customerId
+<span class="kw">WHERE</span> o.id <span class="kw">IS NULL</span>;
+
+<span class="cm">-- Q38: Rolling average using Window Functions</span>
+<span class="kw">SELECT</span> date, salary,
+       AVG(salary) <span class="kw">OVER</span>(<span class="kw">ORDER BY</span> date 
+                         ROWS <span class="kw">BETWEEN</span> <span class="nm">2</span> PRECEDING <span class="kw">AND</span> CURRENT ROW)
+       <span class="kw">AS</span> rolling_avg
+<span class="kw">FROM</span> salaries;
+
+<span class="cm">-- Q39: Delete duplicate rows keeping one</span>
+<span class="kw">DELETE FROM</span> Person
+<span class="kw">WHERE</span> id <span class="kw">NOT IN</span> (
+    <span class="kw">SELECT</span> MIN(id) <span class="kw">FROM</span> Person <span class="kw">GROUP BY</span> email
+);
+
+<span class="cm">-- Q40: Rank employees within department</span>
+<span class="kw">SELECT</span> name, department, salary,
+       RANK() <span class="kw">OVER</span>(<span class="kw">PARTITION BY</span> department <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> dept_rank
+<span class="kw">FROM</span> Employee;
+
+<span class="cm">-- Q41: INNER vs LEFT vs RIGHT vs FULL JOIN</span>
+<span class="cm">-- INNER: Only matching rows from BOTH tables</span>
+<span class="cm">-- LEFT:  All from LEFT + matching from RIGHT (NULL if no match)</span>
+<span class="cm">-- RIGHT: All from RIGHT + matching from LEFT</span>
+<span class="cm">-- FULL:  All from BOTH (NULL where no match)</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Key SQL Concepts for Interviews</div>
+    <table class="sql-table">
+      <tr><th>Concept</th><th>Usage</th><th>Frequency</th></tr>
+      <tr><td>GROUP BY + HAVING</td><td>Aggregate filtering</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td>Window Functions (ROW_NUMBER, RANK, DENSE_RANK)</td><td>Ranking, running totals</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td>Subqueries vs JOINs</td><td>Both approaches needed</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td>CASE WHEN</td><td>Conditional logic</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>CTEs (WITH clause)</td><td>Complex queries</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>EXISTS vs IN vs JOIN</td><td>Performance difference</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>Indexes</td><td>When/why to use</td><td>⭐⭐⭐⭐</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ======================= OOPS ======================= -->
+<div class="section-title" id="sec-oops"><span class="icon">🧱</span>OOPs Coding Questions</div>
+
+<!-- Q42 -->
+<div class="q-card" data-topic="oops" data-diff="medium" data-cat="service product indore" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q42</span>
+  <div class="q-info">
+    <div class="q-title">Design a Bank Account System (OOP)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">TCS</span><span class="company-tag">Infosys</span><span class="company-tag">Wipro</span><span class="company-tag">Cognizant</span><span class="company-tag">Paytm</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">OOPs Concepts Covered</div>
+    <div class="info-alert">🧠 Covers: Encapsulation (private balance), Inheritance (SavingsAccount extends Account), Polymorphism (withdraw() different behavior), Abstraction (abstract Account class)</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Python OOP Implementation</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — OOP Bank System</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+
+<span class="cm"># Abstract Base Class (Abstraction)</span>
+<span class="dt">class</span> <span class="fn">Account</span>(ABC):
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, account_no, owner, balance=<span class="nm">0</span>):
+        self.__account_no = account_no    <span class="cm"># Private (Encapsulation)</span>
+        self.__owner = owner
+        self.__balance = balance
+        self.__transactions = []
+    
+    <span class="kw">@property</span>
+    <span class="dt">def</span> <span class="fn">balance</span>(self):
+        <span class="kw">return</span> self.__balance
+    
+    <span class="dt">def</span> <span class="fn">deposit</span>(self, amount):
+        <span class="kw">if</span> amount <span class="op"><=</span> <span class="nm">0</span>:
+            <span class="kw">raise</span> ValueError(<span class="st">"Amount must be positive"</span>)
+        self.__balance <span class="op">+=</span> amount
+        self.__transactions.append({<span class="st">'type'</span>:<span class="st">'deposit'</span>,<span class="st">'amt'</span>:amount})
+        <span class="kw">return</span> self.__balance
+    
+    <span class="kw">@abstractmethod</span>
+    <span class="dt">def</span> <span class="fn">withdraw</span>(self, amount):
+        <span class="kw">pass</span>  <span class="cm"># Different behavior per account type</span>
+    
+    <span class="dt">def</span> <span class="fn">__str__</span>(self):
+        <span class="kw">return</span> <span class="st">f"Account({self.__owner}, ₹{self.__balance})"</span>
+
+<span class="cm"># Inheritance</span>
+<span class="dt">class</span> <span class="fn">SavingsAccount</span>(Account):
+    MIN_BALANCE = <span class="nm">500</span>
+    
+    <span class="dt">def</span> <span class="fn">withdraw</span>(self, amount):
+        <span class="kw">if</span> self.balance <span class="op">-</span> amount <span class="op"><</span> self.MIN_BALANCE:
+            <span class="kw">raise</span> ValueError(<span class="st">f"Minimum balance ₹{self.MIN_BALANCE} required"</span>)
+        self._Account__balance <span class="op">-=</span> amount
+        <span class="kw">return</span> self.balance
+
+<span class="dt">class</span> <span class="fn">CurrentAccount</span>(Account):
+    OVERDRAFT_LIMIT = <span class="nm">10000</span>
+    
+    <span class="dt">def</span> <span class="fn">withdraw</span>(self, amount):  <span class="cm"># Polymorphism</span>
+        <span class="kw">if</span> self.balance <span class="op">-</span> amount <span class="op"><</span> <span class="op">-</span>self.OVERDRAFT_LIMIT:
+            <span class="kw">raise</span> ValueError(<span class="st">"Overdraft limit exceeded"</span>)
+        self._Account__balance <span class="op">-=</span> amount
+        <span class="kw">return</span> self.balance
+
+<span class="cm"># Test</span>
+acc = SavingsAccount(<span class="st">"SB001"</span>, <span class="st">"Saurav"</span>, <span class="nm">5000</span>)
+acc.deposit(<span class="nm">2000</span>)
+print(acc.balance)  <span class="cm"># 7000</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= LLD ======================= -->
+<div class="section-title" id="sec-lld"><span class="icon">🏗️</span>Low Level Design & Machine Coding</div>
+
+<!-- Q43 -->
+<div class="q-card" data-topic="lld" data-diff="hard" data-cat="faang product startup" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q43</span>
+  <div class="q-info">
+    <div class="q-title">Design Parking Lot System (LLD)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Uber</span><span class="company-tag">Ola</span><span class="company-tag">Paytm</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Requirements</div>
+    <div class="q-text">Design a parking lot with: Multiple floors, Multiple spot types (compact/large/handicapped), Entry/exit gates, Automated ticketing system, Calculate parking fee.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ LLD — Parking Lot</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Parking Lot LLD</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">from</span> enum <span class="kw">import</span> Enum
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+
+<span class="dt">class</span> <span class="fn">VehicleType</span>(Enum):
+    BIKE = <span class="st">"bike"</span>
+    CAR = <span class="st">"car"</span>
+    TRUCK = <span class="st">"truck"</span>
+
+<span class="dt">class</span> <span class="fn">SpotType</span>(Enum):
+    SMALL = <span class="st">"small"</span>
+    MEDIUM = <span class="st">"medium"</span>
+    LARGE = <span class="st">"large"</span>
+
+<span class="dt">class</span> <span class="fn">Vehicle</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, plate, vehicle_type):
+        self.plate = plate
+        self.type = vehicle_type
+
+<span class="dt">class</span> <span class="fn">ParkingSpot</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, spot_id, spot_type):
+        self.spot_id = spot_id
+        self.spot_type = spot_type
+        self.is_occupied = False
+        self.vehicle = None
+    
+    <span class="dt">def</span> <span class="fn">park</span>(self, vehicle):
+        self.is_occupied = True
+        self.vehicle = vehicle
+    
+    <span class="dt">def</span> <span class="fn">leave</span>(self):
+        self.is_occupied = False
+        self.vehicle = None
+
+<span class="dt">class</span> <span class="fn">Ticket</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, vehicle, spot):
+        self.vehicle = vehicle
+        self.spot = spot
+        self.entry_time = datetime.now()
+    
+    <span class="dt">def</span> <span class="fn">calculate_fee</span>(self, rate_per_hour=<span class="nm">50</span>):
+        hours = (datetime.now() <span class="op">-</span> self.entry_time).seconds <span class="op">/</span> <span class="nm">3600</span>
+        <span class="kw">return</span> max(<span class="nm">50</span>, round(hours <span class="op">*</span> rate_per_hour))  <span class="cm"># Min ₹50</span>
+
+<span class="dt">class</span> <span class="fn">ParkingLot</span>:
+    _instance = None
+    
+    <span class="kw">@classmethod</span>
+    <span class="dt">def</span> <span class="fn">get_instance</span>(cls):  <span class="cm"># Singleton Pattern</span>
+        <span class="kw">if</span> <span class="kw">not</span> cls._instance:
+            cls._instance = ParkingLot()
+        <span class="kw">return</span> cls._instance
+    
+    <span class="dt">def</span> <span class="fn">__init__</span>(self):
+        self.spots = {st: [] <span class="kw">for</span> st <span class="kw">in</span> SpotType}
+        self.active_tickets = {}
+    
+    <span class="dt">def</span> <span class="fn">add_spot</span>(self, spot):
+        self.spots[spot.spot_type].append(spot)
+    
+    <span class="dt">def</span> <span class="fn">park_vehicle</span>(self, vehicle):
+        spot_type = self._get_spot_type(vehicle.type)
+        available = [s <span class="kw">for</span> s <span class="kw">in</span> self.spots[spot_type] <span class="kw">if</span> <span class="kw">not</span> s.is_occupied]
+        <span class="kw">if</span> <span class="kw">not</span> available:
+            <span class="kw">raise</span> Exception(<span class="st">"No spots available"</span>)
+        spot = available[<span class="nm">0</span>]
+        spot.park(vehicle)
+        ticket = Ticket(vehicle, spot)
+        self.active_tickets[vehicle.plate] = ticket
+        <span class="kw">return</span> ticket
+    
+    <span class="dt">def</span> <span class="fn">_get_spot_type</span>(self, vehicle_type):
+        mapping = {VehicleType.BIKE: SpotType.SMALL,
+                   VehicleType.CAR: SpotType.MEDIUM,
+                   VehicleType.TRUCK: SpotType.LARGE}
+        <span class="kw">return</span> mapping[vehicle_type]</pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Design Patterns Used</div>
+    <div class="tips-grid">
+      <div class="tip-box info"><div class="tip-label">Singleton Pattern</div>ParkingLot — Only one instance of the lot exists in the system.</div>
+      <div class="tip-box info"><div class="tip-label">Strategy Pattern</div>FeeCalculation — Different rate strategies (hourly, daily, weekly).</div>
+      <div class="tip-box good"><div class="tip-label">Factory Pattern</div>SpotFactory — Creates different spot types based on requirements.</div>
+      <div class="tip-box warn"><div class="tip-label">Interview Tip</div>Always clarify requirements first! "What vehicle types?" "How many floors?" "Is it multi-location?"</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q44 LRU Cache -->
+<div class="q-card" data-topic="lld" data-diff="hard" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q44</span>
+  <div class="q-info">
+    <div class="q-title">LRU Cache Implementation (Machine Coding Classic)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Uber</span><span class="company-tag">Razorpay</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Design a data structure that follows Least Recently Used (LRU) cache eviction policy. Implement get(key) and put(key, value) — both O(1) time.</div>
+    <div class="info-alert">🧠 Browser ka back button! Jo page sabse pehle visit kiya tha aur abhi koi kaam nahi, woh pehle hatega. CPU cache bhi same principle use karta hai!</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ HashMap + Doubly Linked List</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — LRU Cache</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">from</span> collections <span class="kw">import</span> OrderedDict
+
+<span class="cm"># Simple approach using OrderedDict</span>
+<span class="dt">class</span> <span class="fn">LRUCache</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, capacity):
+        self.capacity = capacity
+        self.cache = OrderedDict()
+    
+    <span class="dt">def</span> <span class="fn">get</span>(self, key):
+        <span class="kw">if</span> key <span class="kw">not</span> <span class="kw">in</span> self.cache:
+            <span class="kw">return</span> <span class="op">-</span><span class="nm">1</span>
+        self.cache.move_to_end(key)  <span class="cm"># Mark as recently used</span>
+        <span class="kw">return</span> self.cache[key]
+    
+    <span class="dt">def</span> <span class="fn">put</span>(self, key, value):
+        <span class="kw">if</span> key <span class="kw">in</span> self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        <span class="kw">if</span> len(self.cache) <span class="op">></span> self.capacity:
+            self.cache.popitem(last=False)  <span class="cm"># Remove LRU (first)</span>
+
+<span class="cm"># Interviewer may ask for custom DLL implementation:</span>
+<span class="dt">class</span> <span class="fn">DLLNode</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, key, val):
+        self.key, self.val = key, val
+        self.prev = self.next = None
+
+<span class="dt">class</span> <span class="fn">LRUCacheManual</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, capacity):
+        self.cap = capacity
+        self.cache = {}
+        <span class="cm"># Dummy head (LRU end) and tail (MRU end)</span>
+        self.head = DLLNode(<span class="nm">0</span>, <span class="nm">0</span>)
+        self.tail = DLLNode(<span class="nm">0</span>, <span class="nm">0</span>)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+    
+    <span class="dt">def</span> <span class="fn">_remove</span>(self, node):
+        node.prev.next = node.next
+        node.next.prev = node.prev
+    
+    <span class="dt">def</span> <span class="fn">_insert_tail</span>(self, node):  <span class="cm"># MRU position</span>
+        node.prev = self.tail.prev
+        node.next = self.tail
+        self.tail.prev.next = node
+        self.tail.prev = node
+    
+    <span class="dt">def</span> <span class="fn">get</span>(self, key):
+        <span class="kw">if</span> key <span class="kw">in</span> self.cache:
+            self._remove(self.cache[key])
+            self._insert_tail(self.cache[key])
+            <span class="kw">return</span> self.cache[key].val
+        <span class="kw">return</span> <span class="op">-</span><span class="nm">1</span>
+    
+    <span class="dt">def</span> <span class="fn">put</span>(self, key, value):
+        <span class="kw">if</span> key <span class="kw">in</span> self.cache:
+            self._remove(self.cache[key])
+        node = DLLNode(key, value)
+        self.cache[key] = node
+        self._insert_tail(node)
+        <span class="kw">if</span> len(self.cache) <span class="op">></span> self.cap:
+            lru = self.head.next
+            self._remove(lru)
+            <span class="dt">del</span> self.cache[lru.key]</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= MULTITHREADING ======================= -->
+<div class="section-title" id="sec-thread"><span class="icon">🧵</span>Multithreading Basics</div>
+
+<!-- Q45 -->
+<div class="q-card" data-topic="thread" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q45</span>
+  <div class="q-info">
+    <div class="q-title">Producer-Consumer Problem (Threading)</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span><span class="company-tag">Oracle</span><span class="company-tag">Qualcomm</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">✅ Python Threading Solution</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Producer Consumer</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">import</span> threading
+<span class="kw">import</span> queue
+<span class="kw">import</span> time
+
+<span class="dt">class</span> <span class="fn">ProducerConsumer</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, buffer_size=<span class="nm">5</span>):
+        self.buffer = queue.Queue(maxsize=buffer_size)
+        self.lock = threading.Lock()
+    
+    <span class="dt">def</span> <span class="fn">producer</span>(self, items):
+        <span class="kw">for</span> item <span class="kw">in</span> items:
+            self.buffer.put(item)  <span class="cm"># Blocks if full</span>
+            <span class="kw">with</span> self.lock:
+                print(<span class="st">f"Produced: {item}"</span>)
+            time.sleep(<span class="nm">0.1</span>)
+    
+    <span class="dt">def</span> <span class="fn">consumer</span>(self):
+        <span class="kw">while</span> True:
+            item = self.buffer.get()  <span class="cm"># Blocks if empty</span>
+            <span class="kw">if</span> item <span class="kw">is</span> None: <span class="kw">break</span>  <span class="cm"># Poison pill</span>
+            <span class="kw">with</span> self.lock:
+                print(<span class="st">f"Consumed: {item}"</span>)
+            self.buffer.task_done()
+
+<span class="cm"># Key Concepts:</span>
+<span class="cm"># Race Condition: Multiple threads modify shared data simultaneously</span>
+<span class="cm"># Mutex/Lock: Only one thread at a time</span>
+<span class="cm"># Deadlock: Thread A waits for B, B waits for A → forever blocked</span>
+<span class="cm"># Semaphore: Limits number of threads accessing a resource</span>
+<span class="cm"># GIL in Python: Global Interpreter Lock — true parallelism needs multiprocessing</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= HR + VIVA ======================= -->
+<div class="section-title" id="sec-hr"><span class="icon">💼</span>HR + Technical Viva Questions</div>
+
+<!-- Q46 -->
+<div class="q-card" data-topic="hr" data-diff="easy" data-cat="service product indore" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q46-55</span>
+  <div class="q-info">
+    <div class="q-title">Top HR + CS Fundamentals Asked with Coding Interviews</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">All Levels</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Must Know</span>
+      <span class="company-tag">All Companies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">HR Questions with Best Answers</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">HR Interview — Best Answers Framework</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="cm"># Q46: "Tell me about yourself" — FORMULA: Present → Past → Future</span>
+<span class="cm">"""
+Present: "I'm a BCA graduate from DAVV University currently completing 
+ITEP training at Infobeans Foundation, Indore — covering Python, DSA, 
+full-stack development with React and Node.js."
+Past: "During my studies, I built Tech Career Navigator — a full-stack 
+app with JWT auth, MySQL, and React — which helped me understand 
+real-world software architecture."
+Future: "I'm looking to join as an [role] where I can contribute to 
+building AI-powered products and grow as an AI/full-stack engineer."
+"""
+
+<span class="cm"># Q47: "Why do you want to join our company?"</span>
+<span class="cm">"""Research the company! Mention specific products/values.
+TCS: "TCS's focus on digital transformation and huge L&D investment"
+Amazon: "Amazon's customer obsession and 'Day 1' innovation mindset"
+Freshworks: "Building SaaS products that genuinely help SMEs globally"
+"""</span>
+
+<span class="cm"># Q48: "What is your greatest weakness?" — Be honest + show growth</span>
+<span class="cm">"""
+"I sometimes over-engineer solutions — I get excited about clean 
+architecture. I'm working on this by setting time-boxes and shipping 
+MVPs first, then refactoring."
+"""</span>
+
+<span class="cm"># Q49: "Where do you see yourself in 5 years?"</span>
+<span class="cm">"""
+"In 5 years, I see myself as a skilled AI Engineer — building 
+RAG systems and AI agents using LangChain and vector databases, 
+possibly leading a small team working on an internal AI product."
+"""</span>
+
+<span class="cm"># Q50: "Explain a project you're most proud of" — STAR Method</span>
+<span class="cm">"""
+Situation: "During final year, I wanted a full-stack portfolio project."
+Task: "Built Tech Career Navigator — a career guidance platform."
+Action: "Designed 10-table MySQL schema, Node.js REST API, JWT auth,
+React frontend with dark UI. Deployed on local server."
+Result: "Demonstrates end-to-end skills. Featured in my LinkedIn and
+resume. Impressed interviewers at multiple screenings."
+"""</span></pre>
+    </div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">CS Fundamentals Asked in Interviews</div>
+    <table class="sql-table">
+      <tr><th>Question</th><th>Quick Answer</th></tr>
+      <tr><td>Process vs Thread?</td><td>Process = independent program with its own memory. Thread = lightweight unit within a process, shares memory.</td></tr>
+      <tr><td>Stack vs Heap Memory?</td><td>Stack = function calls, local variables (LIFO, auto-managed). Heap = dynamic allocation (malloc/new), manual or GC.</td></tr>
+      <tr><td>What is Deadlock?</td><td>Circular wait — Thread A holds R1 waits for R2, Thread B holds R2 waits for R1. Prevention: ordering, timeouts.</td></tr>
+      <tr><td>ACID Properties?</td><td>Atomicity, Consistency, Isolation, Durability — database transaction guarantees.</td></tr>
+      <tr><td>REST vs SOAP?</td><td>REST: stateless, JSON, HTTP verbs. SOAP: XML, more rigid, has WSDL. REST preferred for modern APIs.</td></tr>
+      <tr><td>TCP vs UDP?</td><td>TCP: reliable, ordered, connection-based (HTTP, FTP). UDP: fast, no guarantee (video streaming, gaming, DNS).</td></tr>
+      <tr><td>Normalization?</td><td>1NF (atomic values) → 2NF (no partial dependency) → 3NF (no transitive dependency). Reduces redundancy.</td></tr>
+      <tr><td>What is an Index in DB?</td><td>Data structure (B-tree usually) that speeds up SELECT but slows INSERT/UPDATE. Like book's table of contents.</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ======================= ADDITIONAL IMPORTANT QUESTIONS ======================= -->
+<div class="section-title"><span class="icon">⭐</span>Additional Must-Do Questions</div>
+
+<!-- Q56 Word Break DP -->
+<div class="q-card" data-topic="dp" data-diff="medium" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q56</span>
+  <div class="q-info">
+    <div class="q-title">Word Break Problem</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-medium">Medium</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Google</span><span class="company-tag">Amazon</span><span class="company-tag">Facebook</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Given a string s and a dictionary of strings wordDict, return true if s can be segmented into space-separated sequence of dictionary words.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Sample Input / Output</div>
+    <div class="io-box"><span class="label">Input:</span>s = "leetcode", wordDict = ["leet","code"]  →  True
+<span class="label">Input:</span>s = "applepenapple", wordDict = ["apple","pen"]  →  True</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ DP Solution</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Word Break DP</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">word_break</span>(s, wordDict):
+    word_set = set(wordDict)
+    n = len(s)
+    dp = [False] <span class="op">*</span> (n <span class="op">+</span> <span class="nm">1</span>)
+    dp[<span class="nm">0</span>] = True  <span class="cm"># Empty string can always be segmented</span>
+    
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">1</span>, n<span class="op">+</span><span class="nm">1</span>):
+        <span class="kw">for</span> j <span class="kw">in</span> range(i):
+            <span class="kw">if</span> dp[j] <span class="kw">and</span> s[j:i] <span class="kw">in</span> word_set:
+                dp[i] = True
+                <span class="kw">break</span>
+    
+    <span class="kw">return</span> dp[n]</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q57 Find Median from Data Stream -->
+<div class="q-card" data-topic="heap" data-diff="hard" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q57</span>
+  <div class="q-info">
+    <div class="q-title">Find Median from Data Stream</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐ High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">✅ Two Heaps Approach</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Two Heaps</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">import</span> heapq
+
+<span class="dt">class</span> <span class="fn">MedianFinder</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self):
+        self.small = []  <span class="cm"># Max-heap (lower half) — negate for Python</span>
+        self.large = []  <span class="cm"># Min-heap (upper half)</span>
+    
+    <span class="dt">def</span> <span class="fn">add_num</span>(self, num):
+        heapq.heappush(self.small, <span class="op">-</span>num)
+        <span class="cm"># Balance: all in small <= all in large</span>
+        <span class="kw">if</span> self.small <span class="kw">and</span> self.large <span class="kw">and</span> (<span class="op">-</span>self.small[<span class="nm">0</span>] <span class="op">></span> self.large[<span class="nm">0</span>]):
+            heapq.heappush(self.large, <span class="op">-</span>heapq.heappop(self.small))
+        <span class="cm"># Size balance</span>
+        <span class="kw">if</span> len(self.small) <span class="op">></span> len(self.large) <span class="op">+</span> <span class="nm">1</span>:
+            heapq.heappush(self.large, <span class="op">-</span>heapq.heappop(self.small))
+        <span class="kw">elif</span> len(self.large) <span class="op">></span> len(self.small):
+            heapq.heappush(self.small, <span class="op">-</span>heapq.heappop(self.large))
+    
+    <span class="dt">def</span> <span class="fn">find_median</span>(self):
+        <span class="kw">if</span> len(self.small) <span class="op">></span> len(self.large):
+            <span class="kw">return</span> <span class="op">-</span>self.small[<span class="nm">0</span>]
+        <span class="kw">return</span> (<span class="op">-</span>self.small[<span class="nm">0</span>] <span class="op">+</span> self.large[<span class="nm">0</span>]) <span class="op">/</span> <span class="nm">2</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q58 Sudoku Solver -->
+<div class="q-card" data-topic="backtrack" data-diff="hard" data-cat="faang" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q58</span>
+  <div class="q-info">
+    <div class="q-title">Sudoku Solver</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐ Medium</span>
+      <span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Adobe</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">✅ Backtracking Solution</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Sudoku Solver</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">def</span> <span class="fn">solve_sudoku</span>(board):
+    <span class="dt">def</span> <span class="fn">is_valid</span>(row, col, num):
+        n = str(num)
+        <span class="cm"># Check row, col, 3x3 box</span>
+        box_r, box_c = <span class="nm">3</span><span class="op">*</span>(row<span class="op">//</span><span class="nm">3</span>), <span class="nm">3</span><span class="op">*</span>(col<span class="op">//</span><span class="nm">3</span>)
+        <span class="kw">return</span> (n <span class="kw">not</span> <span class="kw">in</span> board[row] <span class="kw">and</span>
+                n <span class="kw">not</span> <span class="kw">in</span> [board[i][col] <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">9</span>)] <span class="kw">and</span>
+                n <span class="kw">not</span> <span class="kw">in</span> [board[box_r<span class="op">+</span>i][box_c<span class="op">+</span>j] <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">3</span>) <span class="kw">for</span> j <span class="kw">in</span> range(<span class="nm">3</span>)])
+    
+    <span class="dt">def</span> <span class="fn">solve</span>():
+        <span class="kw">for</span> i <span class="kw">in</span> range(<span class="nm">9</span>):
+            <span class="kw">for</span> j <span class="kw">in</span> range(<span class="nm">9</span>):
+                <span class="kw">if</span> board[i][j] <span class="op">==</span> <span class="st">'.'</span>:
+                    <span class="kw">for</span> num <span class="kw">in</span> range(<span class="nm">1</span>, <span class="nm">10</span>):
+                        <span class="kw">if</span> is_valid(i, j, num):
+                            board[i][j] = str(num)
+                            <span class="kw">if</span> solve(): <span class="kw">return</span> True
+                            board[i][j] = <span class="st">'.'</span>  <span class="cm"># Backtrack</span>
+                    <span class="kw">return</span> False
+        <span class="kw">return</span> True
+    
+    solve()</pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q59 Segment Tree -->
+<div class="q-card" data-topic="segment" data-diff="hard" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q59</span>
+  <div class="q-info">
+    <div class="q-title">Segment Tree — Range Sum Queries</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐ Medium</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Codeforces-style</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Problem Statement</div>
+    <div class="q-text">Build a data structure for range sum queries and point updates in O(log n) time.</div>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">✅ Segment Tree Implementation</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Segment Tree</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="dt">class</span> <span class="fn">SegmentTree</span>:
+    <span class="dt">def</span> <span class="fn">__init__</span>(self, nums):
+        self.n = len(nums)
+        self.tree = [<span class="nm">0</span>] <span class="op">*</span> (<span class="nm">4</span> <span class="op">*</span> self.n)
+        self.build(nums, <span class="nm">0</span>, <span class="nm">0</span>, self.n<span class="op">-</span><span class="nm">1</span>)
+    
+    <span class="dt">def</span> <span class="fn">build</span>(self, nums, node, start, end):
+        <span class="kw">if</span> start <span class="op">==</span> end:
+            self.tree[node] = nums[start]
+        <span class="kw">else</span>:
+            mid = (start <span class="op">+</span> end) <span class="op">//</span> <span class="nm">2</span>
+            self.build(nums, <span class="nm">2</span><span class="op">*</span>node<span class="op">+</span><span class="nm">1</span>, start, mid)
+            self.build(nums, <span class="nm">2</span><span class="op">*</span>node<span class="op">+</span><span class="nm">2</span>, mid<span class="op">+</span><span class="nm">1</span>, end)
+            self.tree[node] = self.tree[<span class="nm">2</span><span class="op">*</span>node<span class="op">+</span><span class="nm">1</span>] <span class="op">+</span> self.tree[<span class="nm">2</span><span class="op">*</span>node<span class="op">+</span><span class="nm">2</span>]
+    
+    <span class="dt">def</span> <span class="fn">query</span>(self, l, r, node=<span class="nm">0</span>, start=<span class="nm">0</span>, end=None):
+        <span class="kw">if</span> end <span class="kw">is</span> None: end = self.n<span class="op">-</span><span class="nm">1</span>
+        <span class="kw">if</span> r <span class="op"><</span> start <span class="kw">or</span> l <span class="op">></span> end: <span class="kw">return</span> <span class="nm">0</span>
+        <span class="kw">if</span> l <span class="op"><=</span> start <span class="kw">and</span> end <span class="op"><=</span> r: <span class="kw">return</span> self.tree[node]
+        mid = (start <span class="op">+</span> end) <span class="op">//</span> <span class="nm">2</span>
+        <span class="kw">return</span> (self.query(l, r, <span class="nm">2</span><span class="op">*</span>node<span class="op">+</span><span class="nm">1</span>, start, mid) <span class="op">+</span>
+                self.query(l, r, <span class="nm">2</span><span class="op">*</span>node<span class="op">+</span><span class="nm">2</span>, mid<span class="op">+</span><span class="nm">1</span>, end))
+
+<span class="cm"># Query: O(log n), Build: O(n), Space: O(n)</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Q60 Merge K Sorted Lists -->
+<div class="q-card" data-topic="heap linkedlist" data-diff="hard" data-cat="faang product" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">Q60</span>
+  <div class="q-info">
+    <div class="q-title">Merge K Sorted Linked Lists</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-hard">Hard</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Very High</span>
+      <span class="company-tag">Amazon</span><span class="company-tag">Google</span><span class="company-tag">Microsoft</span><span class="company-tag">Uber</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">✅ Min-Heap Approach O(N log K)</div>
+    <div class="code-block">
+      <div class="code-top"><span class="code-lang">Python — Merge K Lists with Heap</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="kw">import</span> heapq
+
+<span class="dt">def</span> <span class="fn">merge_k_lists</span>(lists):
+    heap = []
+    dummy = ListNode(<span class="nm">0</span>)
+    current = dummy
+    
+    <span class="cm"># Initialize heap with first node of each list</span>
+    <span class="kw">for</span> i, node <span class="kw">in</span> enumerate(lists):
+        <span class="kw">if</span> node:
+            heapq.heappush(heap, (node.val, i, node))
+    
+    <span class="kw">while</span> heap:
+        val, i, node = heapq.heappop(heap)
+        current.next = node
+        current = current.next
+        <span class="kw">if</span> node.next:
+            heapq.heappush(heap, (node.next.val, i, node.next))
+    
+    <span class="kw">return</span> dummy.next
+
+<span class="cm"># N = total nodes, K = number of lists</span>
+<span class="cm"># Time: O(N log K), Space: O(K)</span></pre>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ======================= TOP 100 CHECKLIST ======================= -->
+<div class="section-title"><span class="icon">📋</span>Top 100 Must-Do Questions Checklist</div>
+
+<div class="q-card" data-topic="all" data-diff="all" data-cat="all" onclick="toggleCard(this)">
+<div class="q-header">
+  <span class="q-num">📋</span>
+  <div class="q-info">
+    <div class="q-title">Top 100 Must-Do Problems — Category-wise Checklist</div>
+    <div class="q-meta">
+      <span class="diff-badge diff-easy">All Levels</span>
+      <span class="freq-tag">⭐⭐⭐⭐⭐ Must Do</span>
+      <span class="company-tag">All Companies</span>
+    </div>
+  </div>
+  <span class="q-chevron">▼</span>
+</div>
+<div class="q-body">
+  <div class="q-section">
+    <div class="q-section-label">Arrays & Strings (20)</div>
+    <table class="sql-table">
+      <tr><th>#</th><th>Problem</th><th>Platform</th><th>Diff</th></tr>
+      <tr><td>1</td><td>Two Sum</td><td>LC 1</td><td>🟢 Easy</td></tr>
+      <tr><td>2</td><td>Best Time to Buy & Sell Stock</td><td>LC 121</td><td>🟢 Easy</td></tr>
+      <tr><td>3</td><td>Contains Duplicate</td><td>LC 217</td><td>🟢 Easy</td></tr>
+      <tr><td>4</td><td>Product of Array Except Self</td><td>LC 238</td><td>🟡 Med</td></tr>
+      <tr><td>5</td><td>Maximum Subarray (Kadane's)</td><td>LC 53</td><td>🟢 Easy</td></tr>
+      <tr><td>6</td><td>Maximum Product Subarray</td><td>LC 152</td><td>🟡 Med</td></tr>
+      <tr><td>7</td><td>Find Min in Rotated Sorted Array</td><td>LC 153</td><td>🟡 Med</td></tr>
+      <tr><td>8</td><td>Search in Rotated Sorted Array</td><td>LC 33</td><td>🟡 Med</td></tr>
+      <tr><td>9</td><td>3Sum</td><td>LC 15</td><td>🟡 Med</td></tr>
+      <tr><td>10</td><td>Container With Most Water</td><td>LC 11</td><td>🟡 Med</td></tr>
+      <tr><td>11</td><td>Valid Anagram</td><td>LC 242</td><td>🟢 Easy</td></tr>
+      <tr><td>12</td><td>Group Anagrams</td><td>LC 49</td><td>🟡 Med</td></tr>
+      <tr><td>13</td><td>Longest Substring Without Repeating</td><td>LC 3</td><td>🟡 Med</td></tr>
+      <tr><td>14</td><td>Longest Repeating Char Replacement</td><td>LC 424</td><td>🟡 Med</td></tr>
+      <tr><td>15</td><td>Minimum Window Substring</td><td>LC 76</td><td>🔴 Hard</td></tr>
+      <tr><td>16</td><td>Valid Parentheses</td><td>LC 20</td><td>🟢 Easy</td></tr>
+      <tr><td>17</td><td>Trapping Rain Water</td><td>LC 42</td><td>🔴 Hard</td></tr>
+      <tr><td>18</td><td>Rotate Array</td><td>LC 189</td><td>🟡 Med</td></tr>
+      <tr><td>19</td><td>Majority Element</td><td>LC 169</td><td>🟢 Easy</td></tr>
+      <tr><td>20</td><td>Merge Intervals</td><td>LC 56</td><td>🟡 Med</td></tr>
+    </table>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Linked List (10)</div>
+    <table class="sql-table">
+      <tr><th>#</th><th>Problem</th><th>Platform</th><th>Diff</th></tr>
+      <tr><td>21</td><td>Reverse Linked List</td><td>LC 206</td><td>🟢 Easy</td></tr>
+      <tr><td>22</td><td>Merge Two Sorted Lists</td><td>LC 21</td><td>🟢 Easy</td></tr>
+      <tr><td>23</td><td>Linked List Cycle</td><td>LC 141</td><td>🟢 Easy</td></tr>
+      <tr><td>24</td><td>Reorder List</td><td>LC 143</td><td>🟡 Med</td></tr>
+      <tr><td>25</td><td>Remove Nth Node From End</td><td>LC 19</td><td>🟡 Med</td></tr>
+      <tr><td>26</td><td>Copy List with Random Pointer</td><td>LC 138</td><td>🟡 Med</td></tr>
+      <tr><td>27</td><td>Add Two Numbers (LL)</td><td>LC 2</td><td>🟡 Med</td></tr>
+      <tr><td>28</td><td>Find Duplicate Number</td><td>LC 287</td><td>🟡 Med</td></tr>
+      <tr><td>29</td><td>LRU Cache</td><td>LC 146</td><td>🔴 Hard</td></tr>
+      <tr><td>30</td><td>Merge K Sorted Lists</td><td>LC 23</td><td>🔴 Hard</td></tr>
+    </table>
+  </div>
+  <div class="q-section">
+    <div class="q-section-label">Trees & Graphs (20) + DP (20)</div>
+    <table class="sql-table">
+      <tr><th>#</th><th>Problem</th><th>Platform</th><th>Diff</th></tr>
+      <tr><td>31</td><td>Max Depth of Binary Tree</td><td>LC 104</td><td>🟢 Easy</td></tr>
+      <tr><td>32</td><td>Same Tree</td><td>LC 100</td><td>🟢 Easy</td></tr>
+      <tr><td>33</td><td>Invert Binary Tree</td><td>LC 226</td><td>🟢 Easy</td></tr>
+      <tr><td>34</td><td>Binary Tree Level Order Traversal</td><td>LC 102</td><td>🟡 Med</td></tr>
+      <tr><td>35</td><td>Validate BST</td><td>LC 98</td><td>🟡 Med</td></tr>
+      <tr><td>36</td><td>Kth Smallest in BST</td><td>LC 230</td><td>🟡 Med</td></tr>
+      <tr><td>37</td><td>Lowest Common Ancestor BST</td><td>LC 235</td><td>🟡 Med</td></tr>
+      <tr><td>38</td><td>Binary Tree from Preorder+Inorder</td><td>LC 105</td><td>🟡 Med</td></tr>
+      <tr><td>39</td><td>Serialize/Deserialize Binary Tree</td><td>LC 297</td><td>🔴 Hard</td></tr>
+      <tr><td>40</td><td>Binary Tree Max Path Sum</td><td>LC 124</td><td>🔴 Hard</td></tr>
+      <tr><td>41</td><td>Number of Islands</td><td>LC 200</td><td>🟡 Med</td></tr>
+      <tr><td>42</td><td>Course Schedule (Topological Sort)</td><td>LC 207</td><td>🟡 Med</td></tr>
+      <tr><td>43</td><td>Pacific Atlantic Water Flow</td><td>LC 417</td><td>🟡 Med</td></tr>
+      <tr><td>44</td><td>Clone Graph</td><td>LC 133</td><td>🟡 Med</td></tr>
+      <tr><td>45</td><td>Dijkstra's Shortest Path</td><td>Custom</td><td>🔴 Hard</td></tr>
+      <tr><td>51</td><td>Climbing Stairs</td><td>LC 70</td><td>🟢 Easy</td></tr>
+      <tr><td>52</td><td>House Robber I & II</td><td>LC 198,213</td><td>🟡 Med</td></tr>
+      <tr><td>53</td><td>Longest Palindromic Substring</td><td>LC 5</td><td>🟡 Med</td></tr>
+      <tr><td>54</td><td>Palindromic Substrings</td><td>LC 647</td><td>🟡 Med</td></tr>
+      <tr><td>55</td><td>Decode Ways</td><td>LC 91</td><td>🟡 Med</td></tr>
+      <tr><td>56</td><td>Coin Change</td><td>LC 322</td><td>🟡 Med</td></tr>
+      <tr><td>57</td><td>Maximum Product Subarray</td><td>LC 152</td><td>🟡 Med</td></tr>
+      <tr><td>58</td><td>Word Break</td><td>LC 139</td><td>🟡 Med</td></tr>
+      <tr><td>59</td><td>Longest Increasing Subsequence</td><td>LC 300</td><td>🟡 Med</td></tr>
+      <tr><td>60</td><td>0/1 Knapsack</td><td>GFG</td><td>🟡 Med</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- PROGRESS TRACKER -->
+<div class="section-title"><span class="icon">📈</span>Study Roadmap for Placements</div>
+<div class="progress-section">
+  <div class="progress-title">🎯 Interview Preparation Roadmap — Dragon Boss Edition</div>
+  <div class="prog-item">
+    <div class="prog-label"><span>Week 1-2: Arrays + Strings + HashMap</span><span style="color:var(--easy)">Foundation</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--easy)"></div></div>
+  </div>
+  <div class="prog-item">
+    <div class="prog-label"><span>Week 3-4: Recursion + Sorting + Linked List</span><span style="color:var(--easy)">Core DSA</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--easy)"></div></div>
+  </div>
+  <div class="prog-item">
+    <div class="prog-label"><span>Week 5-6: Stack + Queue + Trees + BST</span><span style="color:var(--medium)">Intermediate</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:80%;background:var(--medium)"></div></div>
+  </div>
+  <div class="prog-item">
+    <div class="prog-label"><span>Week 7-8: DP + Graphs + Sliding Window</span><span style="color:var(--medium)">Advanced</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:60%;background:var(--medium)"></div></div>
+  </div>
+  <div class="prog-item">
+    <div class="prog-label"><span>Week 9-10: Heap + Greedy + Backtracking + Bit</span><span style="color:var(--hard)">Expert</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:40%;background:var(--hard)"></div></div>
+  </div>
+  <div class="prog-item">
+    <div class="prog-label"><span>Week 11-12: Trie + Segment Tree + LLD + SQL</span><span style="color:var(--hard)">FAANG Level</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:20%;background:var(--hard)"></div></div>
+  </div>
+  <div class="info-alert" style="margin-top:16px">💡 <b>Dragon Boss Tip:</b> Daily 2-3 questions from LeetCode/GFG. Track progress, revisit mistakes. Companies like TCS/Infosys: focus Easy→Medium. Amazon/Google: Medium→Hard. Local Indore companies (Nagarro, InfoBeans, Impetus): Medium level + project discussion.</div>
+</div>
+
+</main>
+</div>
+
+<script>
+// Toggle Q card
+function toggleCard(el) {
+  if (!el.classList.contains('q-card')) el = el.closest('.q-card');
+  el.classList.toggle('open');
+}
+
+// Filter by difficulty
+let activeFilters = { diff: 'all', company: 'all' };
+function filterDiff(diff, btn) {
+  activeFilters.diff = diff;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  applyFilters();
+}
+
+function filterCompany(cat, btn) {
+  activeFilters.company = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.q-card').forEach(card => {
+    const diff = card.dataset.diff || '';
+    const cat = card.dataset.cat || '';
+    const text = card.textContent.toLowerCase();
+    
+    const diffMatch = activeFilters.diff === 'all' || diff.includes(activeFilters.diff);
+    const catMatch = activeFilters.company === 'all' || cat.includes(activeFilters.company);
+    const searchMatch = !search || text.includes(search);
+    
+    if (diffMatch && catMatch && searchMatch) {
+      card.style.display = '';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  const el = document.getElementById('visibleCount');
+  if (el) el.textContent = visible;
+}
+
+function filterQuestions() { applyFilters(); }
+
+function showSection(section) {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  event.target.closest('.nav-item').classList.add('active');
+  activeFilters = { diff: 'all', company: 'all' };
+  const search = '';
+  
+  if (section === 'all') {
+    document.querySelectorAll('.q-card').forEach(c => c.style.display = '');
+    return;
+  }
+  
+  document.querySelectorAll('.q-card').forEach(card => {
+    const topic = card.dataset.topic || '';
+    card.style.display = topic.includes(section) ? '' : 'none';
+  });
+}
+
+// Copy code
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>
+</body>
+</html>

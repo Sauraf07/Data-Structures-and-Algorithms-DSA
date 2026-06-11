@@ -25,18 +25,24 @@
 # print("priyam" in list)
 # print(list.index("saurav"))
 # sorting
-list = [5,7,2,7,18,9]
-print(list)
-# list.sort()
+# list = [5,7,2,7,18,9]
 # print(list)
-# list.sort(reverse=True)
-# print(list)
+# # list.sort()
+# # print(list)
+# # list.sort(reverse=True)
+# # print(list)
 
-# slicing From index 1 up to (but not including) index 3
-print("slicing",list[1:3])
-# From the start (index 0) up to index 3
-print(list[:3])
-# From index 2 all the way to the end
-print(list[2:])
-# Steps backwards through the list
-print(list[::-1])
+# # slicing From index 1 up to (but not including) index 3
+# print("slicing",list[1:3])
+# # From the start (index 0) up to index 3
+# print(list[:3])
+# # From index 2 all the way to the end
+# print(list[2:])
+# # Steps backwards through the list
+# print(list[::-1])
+
+
+# ----------------------------------------------
+# Tuples 
+aadhar = ("Saurav","Indore",20,1234567890)
+print(aadhar)
