@@ -1,0 +1,873 @@
+# 📘 Chapter 13 – Functions in Python
+
+<div align="center">
+
+# ⚙️ Functions in Python
+
+### "Write Once, Use Many Times."
+
+🐍 Python 3.x | Beginner Friendly | DSA Preparation
+
+</div>
+
+---
+
+# 📑 Table of Contents
+
+- What is a Function?
+- Why Do We Need Functions?
+- Real-Life Example
+- Defining a Function
+- Calling a Function
+- Function Parameters
+- Function Arguments
+- Types of Arguments
+- Return Statement
+- Local Variables
+- Global Variables
+- Recursive Functions (Introduction)
+- Lambda Functions (Introduction)
+- Best Practices
+- Common Mistakes
+- Interview Questions
+- Practice Questions
+- Cheat Sheet
+- Summary
+
+---
+
+# 🎯 Learning Objectives
+
+After completing this chapter, you will be able to
+
+✅ Understand Functions
+
+✅ Create Functions
+
+✅ Call Functions
+
+✅ Pass Parameters
+
+✅ Return Values
+
+✅ Understand Variable Scope
+
+---
+
+# 🤔 What is a Function?
+
+A **Function** is a block of reusable code that performs a specific task.
+
+Instead of writing the same code again and again,
+
+we write it once inside a function and call it whenever we need it.
+
+---
+
+# 🌍 Real-Life Example
+
+Imagine you have a **Coffee Machine**.
+
+You don't make coffee from scratch every time.
+
+You simply press
+
+```
+Coffee Button
+
+↓
+
+Machine Makes Coffee
+```
+
+Similarly,
+
+A function is like a machine.
+
+You call it,
+
+It performs a task,
+
+It gives you the result.
+
+---
+
+# Why Do We Need Functions?
+
+Without Functions
+
+```python
+print("Welcome Rahul")
+print("Welcome Aman")
+print("Welcome Priya")
+```
+
+Imagine this code repeated 100 times!
+
+With Functions
+
+```python
+def welcome(name):
+    print("Welcome", name)
+
+welcome("Rahul")
+welcome("Aman")
+welcome("Priya")
+```
+
+Cleaner
+
+Shorter
+
+Reusable
+
+---
+
+# Benefits of Functions
+
+✅ Reduce Code Repetition
+
+✅ Easy to Read
+
+✅ Easy to Debug
+
+✅ Easy to Reuse
+
+✅ Easy to Maintain
+
+---
+
+# Function Flow
+
+```
+Program
+
+↓
+
+Call Function
+
+↓
+
+Function Executes
+
+↓
+
+Returns Result
+
+↓
+
+Continue Program
+```
+
+---
+
+# Creating a Function
+
+Use the **def** keyword.
+
+Syntax
+
+```python
+def function_name():
+    # code
+```
+
+---
+
+# Example
+
+```python
+def greet():
+    print("Hello!")
+
+greet()
+```
+
+Output
+
+```
+Hello!
+```
+
+---
+
+# Calling a Function
+
+A function does nothing until it is called.
+
+```python
+def greet():
+    print("Hello!")
+
+greet()
+greet()
+greet()
+```
+
+Output
+
+```
+Hello!
+Hello!
+Hello!
+```
+
+---
+
+# 🌍 Real-Life Example
+
+Think of a TV Remote.
+
+Press
+
+```
+Power Button
+
+↓
+
+TV Turns ON
+```
+
+You can press it anytime.
+
+Functions work the same way.
+
+---
+
+# Function with Parameters
+
+Sometimes functions need information.
+
+That information is called a **Parameter**.
+
+Syntax
+
+```python
+def function_name(parameter):
+    # code
+```
+
+---
+
+# Example
+
+```python
+def greet(name):
+    print("Hello", name)
+
+greet("Rahul")
+```
+
+Output
+
+```
+Hello Rahul
+```
+
+---
+
+# Multiple Parameters
+
+```python
+def student(name, age):
+    print(name)
+    print(age)
+
+student("Rahul", 20)
+```
+
+Output
+
+```
+Rahul
+20
+```
+
+---
+
+# 🌍 Real-Life Example
+
+Pizza Order
+
+```
+Pizza Size
+
+↓
+
+Large
+
+Pizza Type
+
+↓
+
+Cheese
+
+Delivery Address
+
+↓
+
+Your Home
+```
+
+These details are like Parameters.
+
+---
+
+# Parameters vs Arguments
+
+| Parameter | Argument |
+|------------|----------|
+| Variable in Function | Actual Value Passed |
+| Created while Defining | Given while Calling |
+
+Example
+
+```python
+def greet(name):
+```
+
+```
+name
+
+↓
+
+Parameter
+```
+
+Calling
+
+```python
+greet("Rahul")
+```
+
+```
+Rahul
+
+↓
+
+Argument
+```
+
+---
+
+# Types of Arguments
+
+## 1. Positional Arguments
+
+Arguments are passed in order.
+
+```python
+def add(a, b):
+    print(a + b)
+
+add(10, 20)
+```
+
+Output
+
+```
+30
+```
+
+---
+
+## 2. Keyword Arguments
+
+```python
+def student(name, age):
+    print(name, age)
+
+student(age=20, name="Rahul")
+```
+
+Output
+
+```
+Rahul 20
+```
+
+---
+
+## 3. Default Arguments
+
+```python
+def greet(name="Guest"):
+    print(name)
+
+greet()
+
+greet("Rahul")
+```
+
+Output
+
+```
+Guest
+Rahul
+```
+
+---
+
+# Return Statement
+
+The **return** keyword sends a value back.
+
+Syntax
+
+```python
+def function():
+    return value
+```
+
+---
+
+# Example
+
+```python
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+
+print(result)
+```
+
+Output
+
+```
+30
+```
+
+---
+
+# Why Return?
+
+Without return
+
+```python
+def add(a, b):
+    print(a+b)
+```
+
+You only display the answer.
+
+With return
+
+```python
+def add(a,b):
+    return a+b
+```
+
+You can use the answer later.
+
+---
+
+# 🌍 Real-Life Example
+
+Imagine an ATM.
+
+You request
+
+```
+Balance
+```
+
+ATM gives you
+
+```
+₹5000
+```
+
+That is the returned value.
+
+---
+
+# Local Variables
+
+Variables created inside a function.
+
+```python
+def demo():
+    x = 10
+    print(x)
+
+demo()
+```
+
+Output
+
+```
+10
+```
+
+Outside the function
+
+```python
+print(x)
+```
+
+Error
+
+```
+NameError
+```
+
+---
+
+# Global Variables
+
+Variables created outside functions.
+
+```python
+name = "Rahul"
+
+def show():
+    print(name)
+
+show()
+```
+
+Output
+
+```
+Rahul
+```
+
+---
+
+# Local vs Global
+
+| Local | Global |
+|--------|---------|
+| Inside Function | Outside Function |
+| Limited Scope | Available Everywhere |
+| Temporary | Exists Until Program Ends |
+
+---
+
+# Recursive Function (Introduction)
+
+A function calling itself.
+
+Example
+
+```python
+def countdown(n):
+
+    if n == 0:
+        return
+
+    print(n)
+
+    countdown(n-1)
+
+countdown(5)
+```
+
+Output
+
+```
+5
+4
+3
+2
+1
+```
+
+We'll study Recursion in detail later.
+
+---
+
+# Lambda Function (Introduction)
+
+A small one-line function.
+
+Syntax
+
+```python
+lambda arguments : expression
+```
+
+Example
+
+```python
+square = lambda x: x*x
+
+print(square(5))
+```
+
+Output
+
+```
+25
+```
+
+---
+
+# Best Practices
+
+✅ Use meaningful function names
+
+```python
+calculate_salary()
+
+find_max()
+
+reverse_string()
+```
+
+---
+
+✅ Keep functions short.
+
+---
+
+✅ One function should perform one task.
+
+---
+
+✅ Use return instead of print whenever possible.
+
+---
+
+# Common Mistakes
+
+## Forgetting Parentheses
+
+Wrong
+
+```python
+greet
+```
+
+Correct
+
+```python
+greet()
+```
+
+---
+
+## Forgetting return
+
+```python
+def add(a,b):
+    a+b
+```
+
+Correct
+
+```python
+return a+b
+```
+
+---
+
+## Wrong Number of Arguments
+
+```python
+def add(a,b):
+    return a+b
+
+add(10)
+```
+
+Error
+
+```
+TypeError
+```
+
+---
+
+# Interview Questions
+
+### Q1 What is a Function?
+
+### Q2 Why do we use Functions?
+
+### Q3 Difference between Parameter and Argument?
+
+### Q4 Difference between Local and Global Variables?
+
+### Q5 Difference between print() and return?
+
+### Q6 What is Recursion?
+
+### Q7 What is Lambda?
+
+---
+
+# Practice Questions
+
+## Easy
+
+1. Create a function to print your name.
+
+2. Create a function to add two numbers.
+
+3. Create a function to find square.
+
+4. Create a function to greet a user.
+
+5. Create a function to find maximum.
+
+---
+
+## Medium
+
+1. Factorial using Function
+
+2. Prime Number Function
+
+3. Reverse String Function
+
+4. Even/Odd Function
+
+5. Fibonacci Function
+
+---
+
+# Mini Project
+
+## Student Result
+
+```python
+def calculate_grade(marks):
+
+    if marks >= 90:
+        return "A+"
+
+    elif marks >= 75:
+        return "A"
+
+    elif marks >= 60:
+        return "B"
+
+    elif marks >= 40:
+        return "C"
+
+    else:
+        return "Fail"
+
+marks = int(input("Enter Marks: "))
+
+print(calculate_grade(marks))
+```
+
+---
+
+# Cheat Sheet
+
+```python
+# Function
+
+def greet():
+    print("Hello")
+
+# Parameters
+
+def add(a,b):
+    return a+b
+
+# Call
+
+greet()
+
+# Return
+
+result = add(10,20)
+
+# Lambda
+
+square = lambda x:x*x
+```
+
+---
+
+# Summary
+
+✅ Functions are reusable blocks of code.
+
+✅ Use `def` to create a function.
+
+✅ Call a function using its name with parentheses.
+
+✅ Parameters receive data.
+
+✅ Arguments send data.
+
+✅ `return` sends a value back.
+
+✅ Local variables exist only inside functions.
+
+✅ Global variables are accessible throughout the program.
+
+✅ Recursion is when a function calls itself.
+
+✅ Lambda functions are small anonymous functions.
+
+---
+
+# 🎯 Mini Assignment
+
+Create a **Student Management Program** using Functions.
+
+The program should have these functions:
+
+- `get_student_details()`
+- `calculate_average()`
+- `calculate_grade()`
+- `display_result()`
+
+Input
+
+- Name
+- Roll Number
+- Marks in 3 Subjects
+
+Output
+
+```
+========== Student Report ==========
+
+Name      : Rahul
+
+Roll No   : 101
+
+Average   : 87.33
+
+Grade     : A
+
+====================================
+```
+
+---
+
+# 🎉 Congratulations!
+
+You have completed **Chapter 13 – Functions in Python**.
+
+Functions are one of the most powerful concepts in programming. They help you write clean, reusable, and modular code. Almost every real-world application and every DSA problem uses functions extensively.
+
+---
+
+# 🚀 What's Next?
+
+## Chapter 14 – Recursion in Python
+
+You'll learn:
+
+- What is Recursion?
+- Base Case
+- Recursive Case
+- Call Stack
+- Stack Memory Visualization
+- Dry Run
+- Real-life Examples
+- Factorial
+- Fibonacci
+- Binary Search
+- Tree Traversal
+- Interview Questions
+- Practice Problems
